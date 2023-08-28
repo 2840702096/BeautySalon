@@ -1,0 +1,135 @@
+﻿@model BeautySalon.Models.ViewModels.EditProfileInfoViewModel
+
+@section Top {
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <!-- Master Css -->
+    <link href="/main.css" rel="stylesheet">
+    <link href="/assets/css/color.css" rel="stylesheet" id="colors">
+}
+
+<div class="clear"></div>
+<!--//================Bredcrumb starts==============//-->
+<section>
+    <div class="bredcrumb-section padTB100 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-head">
+                        <div class="page-header-heading">
+                            <h3 class="theme-color">Edit Profile</h3>
+                        </div>
+                        <div class="breadcrumb-box">
+                            <ul class="breadcrumb colorW marB0">
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li class="active">Edit Profile</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//================Bredcrumb end==============//-->
+<div class="clear"></div>
+<!--//================Book Table start==============//-->
+<section class="padT100 padB70">
+    <!--- Theme heading start-->
+    <div class="theme-heading marB50 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+                    <h1>Edit Profile</h1>
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+                    <p>
+                        Your Information Is Important For us
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- Theme heading end-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+                <div class="theme-form marB30">
+                    <div class="row">
+                        @if (ViewBag.ImPerfectProfile != null)
+                        {
+                            <div class="alert alert-danger" style="text-align:right">
+                                پروفایل شما تکمیل نشده است! برای انجام رزرواسیون باید پروفایل کاملی داشته باشید
+                            </div>
+                        }
+                        <form asp-action="EditProfileInfo" dir="rtl" enctype="multipart/form-data">
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                <input type="text" asp-for="FullName" placeholder="نام و نام خانوادگی"></input>
+                                <i style="margin:2%" class="fa fa-user input" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                <input type="text" asp-for="Phone" placeholder="نام و نام خانوادگی"></input>
+                                <i style="margin:2%" class="fa fa-phone input" aria-hidden="true"></i>
+                            </div>
+                            <div class="form-group">
+                                <button type="button"
+                                        style="display:block;width:120px; height:30px;border: 1px solid;border-radius: 3px;"
+                                        onclick="document.getElementById('getFile').click()">
+                                    بارگذاری تصویر
+                                </button>
+                                <input asp-for="ImageName" type="file" class="image" id="getFile" style="display:none">
+                                <input type="hidden" value="@Model.CurrentImage" name="currentImage"/>
+                            </div>
+                            <div>
+                                <img id="Product" class="imgPreview" src="/Profile/img/ProfileImages/@Model.CurrentImage"
+                                     style="max-width:150px;max-height:150px;margin-bottom:10px" />
+
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+                                <button type="submit" class="itg-button light">ویرایش</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//================Book Table end==============//-->
+<div class="clear"></div>
+
+@section Bottom {
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+    <script src="/assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+    <script src="/assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="/assets/plugin/acordian/js/jquery-ui.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+    <script src="/assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+    <script src="/assets/plugin/switcher/js/switcher.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.appear.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Product').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#getFile").change(function () {
+            readURL(this);
+        });
+    </script>
+}

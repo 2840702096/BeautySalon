@@ -1,0 +1,125 @@
+﻿@model CreateJobViewModel
+
+@section Top
+    {
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/admin/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/admin/css/app.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/dropzone/dist/dropzone.css">
+    <!--<link rel="stylesheet" href="/admin/vendors/bower_components/flatpickr/dist/flatpickr.min.css" />-->
+    <link href="/admin/css/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/nouislider/distribute/nouislider.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="/admin/vendors/bower_components/rateYo/min/jquery.rateyo.min.css">
+
+
+    <!-- Demo only -->
+    <link rel="stylesheet" href="/admin/demo/css/demo.css">
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">افزودن گروه</h4>
+        <form asp-action="CreateJob" enctype="multipart/form-data" method="post">
+            <h3 class="card-body__title">نام گروه</h3>
+
+            <div class="form-group">
+                <input asp-for="JobName" type="text" class="form-control" >
+                <i class="form-group__bar"></i>
+            </div>
+            <span style="color:red" class="text-danger" asp-validation-for="JobName"></span>
+
+            <h3 class="card-body__title">تصویر</h3>
+
+            <div class="form-group">
+                <button type="button"
+                        style="display:block;width:120px; height:30px;border: 1px solid;border-radius: 3px;"
+                        onclick="document.getElementById('getFile').click()">
+                    بارگذاری تصویر
+                </button>
+                <input asp-for="ImageName" type="file" class="image" id="getFile" style="display:none">
+            </div>
+            <div>
+                <img id="Product" class="imgPreview" src="/Admin/img/DefaultGallery.png"
+                     style="max-width:150px;max-height:150px;margin-bottom:10px" />
+
+            </div>
+            <span style="color:red" asp-validation-for="ImageName"></span>
+
+
+            <div class="form-group mb-0">
+                <div class="product-buttons text-center">
+                    <button class="btn btn-light btn--icon-text" type="submit"><i class="zmdi zmdi-plus"></i> افزودن</button>
+                    <a class="btn btn-light btn--icon-text" href="/Admin/JobList" class="btn btn-light"><i class="zmdi zmdi-arrow-back"></i>بازگشت</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section buttom
+    {
+    <script src="/admin/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/admin/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/admin/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+    <script src="/admin/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script src="/admin/js/app.min.js"></script>
+
+    <script src="/admin/vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script src="/admin/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="/admin/vendors/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="/admin/vendors/bower_components/moment/min/moment.min.js"></script>
+    <!--<script src="/admin/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>-->
+    <script src="/admin/js/jquery.md.bootstrap.datetimepicker.js"></script>
+    <script src="/admin/vendors/bower_components/nouislider/distribute/nouislider.min.js"></script>
+    <script src="/admin/vendors/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script src="/admin/vendors/bower_components/trumbowyg/dist/trumbowyg.min.js"></script>
+    <script src="/admin/vendors/bower_components/rateYo/min/jquery.rateyo.min.js"></script>
+    <script src="/admin/vendors/bower_components/jquery-text-counter/textcounter.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script>
+        $('.datetime-picker1').MdPersianDateTimePicker({
+            targetTextSelector: '.datetime-picker1',
+            targetDateSelector: '.miladi',
+            dateFormat: 'yyyy-MM-dd',
+            isGregorian: false,
+            enableTimePicker: true,
+            //disableBeforeToday: true
+        });
+        $('.multiple').MdPersianDateTimePicker({
+            targetTextSelector: '.multiple',
+            monthsToShow: [1, 1]
+        });
+    </script>
+
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Product').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#getFile").change(function () {
+            readURL(this);
+        });
+    </script>
+    }

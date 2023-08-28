@@ -1,0 +1,309 @@
+﻿@{
+    SubJob Service = ViewBag.Model;
+}
+
+@section Top {
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Master Css -->
+
+    <link href="/main.css" rel="stylesheet">
+
+    <link href="/assets/css/color.css" rel="stylesheet" id="colors">
+}
+
+<div class="clear"></div>
+
+<!--//================Bredcrumb starts==============//-->
+
+<section>
+
+    <div class="bredcrumb-section padTB100 positionR">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="page-head">
+
+                        <div class="page-header-heading">
+
+                            <h3 class="theme-color">Service</h3>
+
+                        </div>
+
+                        <div class="breadcrumb-box">
+
+                            <ul class="breadcrumb colorW marB0">
+
+                                <li>
+
+                                    <a href="index.html">Home</a>
+
+                                </li>
+
+                                <li class="active">Service</li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--//================Bredcrumb end==============//-->
+
+<div class="clear"></div>
+
+<!--//================Services starts==============//-->
+
+<section class="padT100 padB60 grey-bg">
+
+    <!--- Theme heading start-->
+
+    <div class="theme-heading marB50 positionR">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+
+                    <h1>Welcome to our service</h1>
+
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+
+                    <p>
+                        We Will Be Happy To Give You Thease Perefect Services.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--- Theme heading end-->
+
+    <div class="container">
+
+        <div class="row">
+            @if (ViewBag.ThereIsNoServices != null)
+            {
+                <div style="text-align:right" class="alert alert-danger">
+                    با عرض پوزش، فعلا برای این خدمت کارمندی آماده نیست
+                </div>
+            }
+            <div class="service-detail single marB20">
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+
+                    <figure class="marB30">
+
+                        <img style="width:65%; border-radius:5%" src="/Admin/img/SubJobImages/@Service.Image" alt="">
+
+                    </figure>
+
+                </div>
+
+                <div style="text-align:center" class="col-md-6">
+
+                    <h3 class="marB10"><a href="#">@Service.Name</a></h3>
+                    <h4 style="color:dimgrey"><a href="#">امتیاز: @Service.Score</a></h4>
+
+                    <p>
+                       @Service.Description 
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 marB50 service-single text-center">
+
+                <a href="/Services/ReserveService/@Service.Id" class="itg-button dark">رزرو</a>
+                <a href="/Services/@Service.ParentId" class="itg-button">بازگشت</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--//================Services end==============//-->
+
+<div class="clear"></div>
+
+<!--//================ Our Partner start ==============//-->
+
+<div class="partner-box">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div id="partner-slider" class="owl-carousel owl-theme owl-loaded owl-drag">
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/4.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/5.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/6.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/7.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/8.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/6.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/7.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="item">
+
+                        <figure>
+
+                            <img src="assets/img/partner/8.png" alt="">
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--//================ Our Partner end ==============//-->
+
+<div class="clear"></div>
+
+@section Bottom{
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+    <script src="/assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+    <script src="/assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="/assets/plugin/acordian/js/jquery-ui.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+    <script src="/assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+    <script src="/assets/plugin/switcher/js/switcher.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.appear.js"></script>
+    <script src="/assets/js/main.js"></script>
+}

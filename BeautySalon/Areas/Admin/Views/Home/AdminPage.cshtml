@@ -1,0 +1,77 @@
+﻿@model List<Admin>
+
+@section Top{
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/Admin/css/app.min.css">
+}
+
+<div class="content__inner content__inner--sm">
+    <header class="content__title">
+        <h1>لیست ادمین ها</h1>
+
+        <div class="actions">
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/Admin/default.htm" class="dropdown-item">تازه سازی</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">مدیریت ویجت ها</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">تنظیمات</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="toolbar">
+
+        <a class="btn btn-light btn--icon-text" href="/Admin/CreateAdmin"><i class="zmdi zmdi-plus"></i> افزودن ادمین</a>
+
+        <div class="actions">
+            <i class="actions__item zmdi zmdi-search" data-sa-action="toolbar-search-open"></i>
+        </div>
+
+        <div class="toolbar__search" style="display: none;">
+            <input type="text" placeholder="جستجو...">
+
+            <i class="toolbar__search__close zmdi zmdi-long-arrow-left" data-sa-action="toolbar-search-close"></i>
+        </div>
+    </div>
+
+    <div class="contacts row">
+        @foreach (var Item in Model)
+        {
+            <div class="col-md-3 col-sm-4 col-6">
+                <div class="contacts__item">
+                    <a href="/Admin/AdminSpecification/@Item.Id" class="contacts__img">
+                        <img src="/Admin/img/AdminThumbnail/@Item.Image" alt="">
+                    </a>
+
+                    <div class="contacts__info">
+                        <strong>@Item.Name</strong>
+                        <small>@Item.UserName</small>
+                    </div>
+
+                    <a href="/Admin/AdminSpecification/@Item.Id" class="contacts__btn">مشاهده</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section buttom {
+    <script src="/Admin/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/Admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script src="/Admin/js/app.min.js"></script>
+}

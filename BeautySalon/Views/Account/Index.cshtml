@@ -1,0 +1,119 @@
+﻿@{
+    string Phone = ViewBag.Phone;
+}
+
+@section Top{
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <!-- Master Css -->
+    <link href="/main.css" rel="stylesheet">
+    <link href="assets/css/color.css" rel="stylesheet" id="colors">
+}
+
+<!--//================Header end==============//-->
+<div class="clear"></div>
+<!--//================Bredcrumb starts==============//-->
+<section>
+    <div class="bredcrumb-section padTB100 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-head">
+                        <div class="page-header-heading">
+                            <h3 class="theme-color">Account</h3>
+                        </div>
+                        <div class="breadcrumb-box">
+                            <ul class="breadcrumb colorW marB0">
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li class="active">Account</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//================Bredcrumb end==============//-->
+<div class="clear"></div>
+<!--//================Register start==============//-->
+<div class="padT100 padB70 register-section">
+    <div class="container">
+        <div class="register-sec-box padT100 padB70">
+            <div class="row">
+                <div id="login" class="tabcontent theme-form" style="display:block;">
+                    <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2 col-xs-offset-0">
+                        @if (ViewBag.SubAdmin == null)
+                        {
+                            <form asp-action="SignIn">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB10 positionR">
+                                        <input style="text-align:right" type="text" placeholder="شماره تلفن" name="phone">
+                                        <i class="fa fa-phone input" aria-hidden="true"></i>
+                                    </div>
+                                    @if (ViewBag.NullPhoneNumber != null)
+                                    {
+                                        <p style="color:red; text-align:right">لطفا شماره تلفن خود را وراد کنید</p>
+                                    }
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                        <button class="itg-button light Register-box-btn">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="LoginSubAdmin">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB10 positionR">
+                                        <input style="text-align:right" type="password" placeholder="کلمه عبور" name="password">
+                                        <i class="fa fa-lock input" aria-hidden="true"></i>
+                                    </div>
+                                    @if (ViewBag.NullPassword != null)
+                                    {
+                                        <p style="color:red; text-align:right">لطفا کلمه عبور خود را وراد کنید</p>
+                                    }
+                                    @if (ViewBag.InCorrectPassword != null)
+                                    {
+                                        <p style="color:red; text-align:right">کلمه عبور وراد شده، اشتباه می باشد</p>
+                                    }
+
+                                    <input type="hidden" value="@Phone" name="phone" />
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                        <button class="itg-button light Register-box-btn">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//================Register end==============//-->
+<div class="clear"></div>
+<!--//================Footer start==============//-->
+@section Bottom{
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+    <script src="assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+    <script src="assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="assets/plugin/acordian/js/jquery-ui.js"></script>
+    <script src="assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+    <script src="assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+    <script src="assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+    <script src="assets/plugin/switcher/js/switcher.js"></script>
+    <script type="text/javascript" src="assets/plugin/counter/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="assets/plugin/counter/js/jquery.appear.js"></script>
+    <script src="assets/js/main.js"></script>
+}

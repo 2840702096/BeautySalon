@@ -1,0 +1,278 @@
+﻿@using BeautySalon.Models.Tools;
+@section Top{
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Master Css -->
+
+    <link href="/main.css" rel="stylesheet">
+
+    <link href="/assets/css/color.css" rel="stylesheet" id="colors">
+}
+@{
+    int Id = ViewBag.Id;
+}
+
+<div class="clear"></div>
+
+<!--//================Bredcrumb starts==============//-->
+
+<section>
+
+    <div class="bredcrumb-section padTB100 positionR">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="page-head">
+
+                        <div class="page-header-heading">
+
+                            <h3 class="theme-color">User</h3>
+
+                        </div>
+
+                        <div class="breadcrumb-box">
+
+                            <ul class="breadcrumb colorW marB0">
+
+                                <li>
+
+                                    <a href="index.html">Home</a>
+
+                                </li>
+
+                                <li class="active">User</li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--//================Bredcrumb end==============//-->
+
+<div class="clear"></div>
+
+<!--//================User start==============//-->
+
+<section class="padT100 padB70">
+
+    <!--- Theme heading start-->
+
+    <div class="theme-heading marB50 positionR">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+
+                    <h1>User Profile</h1>
+
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+
+                    <p>
+                        Your Information Is Safe
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--- Theme heading end-->
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12 pull-right">
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <div class="row">
+
+                            <div class="user-detail marB30">
+
+                                <div class="col-md-3 col-sm-4 col-xs-12">
+
+                                    <figure class="marB30">
+
+                                        <img src="/Profile/img/ProfileImages/@ViewBag.Model.ImageName" alt="">
+
+                                    </figure>
+
+                                </div>
+
+                                <div class="col-md-9 col-sm-8 col-xs-12">
+
+                                    <div style="margin-bottom:2%">
+                                        <h4><i style="margin-right:1%" class="fa fa-user-circle-o"></i>@ViewBag.Model.FullName</h4>
+                                    </div>
+
+                                    <div style="margin-bottom:2%">
+                                        <p><i class="fa fa-phone marR5 colorB" aria-hidden="true"></i>@ViewBag.Model.Phone</p>
+                                    </div>
+
+                                    <div style="margin-bottom:2%">
+                                        <p><i class="fa fa-star marR5 colorB" aria-hidden="true"></i>@ViewBag.Model.Score</p>
+                                    </div>
+
+
+                                    <ul style="margin-top:4%" class="social-icon">
+                                        <li><a href="/Profile/EditProfileInfo/@Id" class="theme-circle marR10"><i class="fa fa-edit" style="color:white" aria-hidden="true"></i></a></li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--//================User end==============//-->
+
+<div class="clear"></div>
+
+<!--//================Previous Review start==============//-->
+
+<section class="padB70">
+
+    <!--- Theme heading start-->
+
+    <div class="theme-heading marB50 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+                    <h1>Your Reservations</h1>
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+                    <p>
+                        You Can See The Condition Of Your Reservations, Or Your Former Reservations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- Theme heading end-->
+    <div class="container" dir="rtl">
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="data-table" class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th style="text-align:right">زمان</th>
+                            <th style="text-align:right">وضعیت</th>
+                            <th style="text-align:right">قیمت اصلی</th>
+                            <th style="text-align:right">هزینه رزرواسیون</th>
+                            <th style="text-align:right">پرسنل</th>
+                            <th style="text-align:right">پرداخت نهایی</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Item in ViewBag.Reservations)
+                        {
+                            <tr>
+                                <td style="vertical-align:middle">
+                                    @Item.StartTime - @Item.EndTime <br>
+                                    @PersianDate.ToPersianDateString(Item.DayDate)  @Item.DayName
+                                </td>
+                                <td style="vertical-align:middle">
+                                    @if (Item.Status == 0)
+                                    {
+                                        <p>فعال</p>
+                                    }
+                                </td>
+                                <td style="vertical-align:middle">
+                                    @Item.Price
+                                </td>
+                                <td style="vertical-align:middle">
+                                    @Item.ReservationCost
+                                </td>
+                                <td style="vertical-align:middle">
+                                    @Item.AdminName
+                                    در کار <br>
+                                    @Item.JopName
+                                </td>
+                                <td style="vertical-align:middle">
+                                    @if (Item.FinalPayment == null)
+                                    {
+                                        <p>هنوز صورت نگرفته است</p>
+                                    }
+                                    else
+                                    {
+                                        @Item.FinalPayment.ToString("#,0")
+                                        <hr />
+                                        <p>نهایی شده است</p>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--//================Previous Review end==============//-->
+
+<div class="clear"></div>
+
+@section Bottom{
+    <script src="/assets/js/jquery.min.js"></script>
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+
+    <script src="/assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+
+    <script src="/assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+
+    <script src="/assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+
+    <script src="/assets/plugin/acordian/js/jquery-ui.js"></script>
+
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+
+    <script src="/assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+
+    <script src="/assets/plugin/switcher/js/switcher.js"></script>
+
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.countTo.js"></script>
+
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.appear.js"></script>
+
+    <script src="/assets/js/main.js"></script>
+}

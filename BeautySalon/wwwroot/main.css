@@ -1,0 +1,102 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:	Aveda Spa & Wellness - Multipurpose HTML5 Template For Hair, Beauty & Spa
+Version:	1.0.0
+Assigned to:	Themeforest
+Primary use:	 Bar, Cafe, Food, Meals, Dishes, Cakes, Icecream 
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Table of contents]
+
+1 Fonts
+2 Body / body
+3 Default Css
+   3.1 Reset Style / img
+   3.2 Form Inputs / input
+   3.3 Button Style / .itg-button
+   3.4 Padding Style / .pad0
+   3.5 Margin Style / .mar0
+4 Social Icon / .social-icon
+5 Custom Dropdown / .custom-dropdown
+6 Search Bar / .search_bar
+7 Header Style
+   7.1 Top Header / .contact-info
+   7.2 Navigation Bar / .navbar-nav
+8 Main Slider / .slider-text
+9 Heading Style / .heading-lines
+10 Services / .service-circle
+11 Collection Style / .collection-box
+12 Banner Section / .special-style
+13 Menu / .menu-background
+14 Opening Hours / .opening-hours
+15 Special Menu / .menu-list-box
+16 Our Team / .our-team
+17 Testimonials / .customer-section
+18 Products Section / .product-text-sec-box
+19 Price Table / .table-section
+20 Blog Section / .blog
+21 Bredcrumb Section / .breadcrumb
+22 Register Page / .Register-box-btn
+23 Owl Carousel Style / .owl-dots
+24 Preloader / .preloader
+25 Common Css
+	25.1 About / .about-us
+	25.2 Admin Section / .admin-section
+	25.3 Theme Box / .theme-box
+	25.4 Theme Form / .theme-form
+26 Details section / .details-section-boxs
+27 Service Detail / .service-detail
+28 Gallery / .gallery-img
+29 Page style
+	29.1 FAQ Page / .ui-icon
+	29.2 Blockquote / .dishes img
+	29.3 Error Page / .error-page
+	29.4 Pagination / .pagination-box span
+	29.5 Sidebar / .sidebar
+	29.6 Comment Area / .comment-section
+	29.7 Contact Page / .contact-detail
+	29.8 Comming Soon / .comming-soon-content
+	29.9 Team Detail / .chef-detail
+	29.10 Tooltip Section / .tooltip
+	29.11 Landing Page / .demo
+	29.12 Filter Section / .serch-result
+	29.13 User Profile / .user-review
+	29.14 Sidebar / .post-section
+	29.15 Cart Page / .product-order-table
+	29.16 Checkout Page / .checkbox.top
+	29.17 Order Page / .order-page
+30 Vertical Slider / .vertical-slider-box img
+31 Quick View / .modal-open .modal
+32 Footer / .foot-sec
+
+-------------------------------------------------------------------*/
+
+/*---bootstap.CSS ---*/
+@import url("assets/css/bootstrap.min.css");
+/*---mega menu .CSS ---*/
+@import url("assets/plugin/megamenu/css/hover-dropdown-menu.css");
+ /*---fancybox.CSS ---*/
+@import url("assets/plugin/fancyBox/css/jquery.fancybox.css");
+/*---acordian.CSS ---*/
+@import url("assets/plugin/acordian/css/jquery-ui.css");
+/*---owl-carousal.CSS ---*/
+@import url("assets/plugin/owl-carousel/css/owl.carousel.css");
+@import url("assets/plugin/owl-carousel/css/owl.theme.default.css");
+/*---fontawesome.CSS  font ---*/
+@import url("assets/plugin/font-awesome/css/font-awesome.min.css");
+/*---switcher.CSS  font ---*/
+@import url("assets/plugin/switcher/css/switcher.css");
+/* theme effect hover CSS*/
+@import url("assets/plugin/hover-effect/css/themeHover.css");
+/*---fancyBox.css inluad---*/
+@import url("assets/plugin/fancyBox/css/jquery.fancybox.css");
+/*---vertical.css inluad---*/
+@import url("assets/plugin/vertical-slider/css/jquery.bxslider.css");
+/*---STYLE.CSS inluad style---*/
+@import url("assets/css/style.css");
+/*---responsive.CSS inluad style---*/
+@import url("assets/css/responsive.css");
+/*---color.CSS inluad color---*/
+@import url("assets/css/color.css");

@@ -1,0 +1,118 @@
+﻿@model Admin
+
+@section Top{
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/Admin//css/app.min.css">
+}
+
+<div class="content__inner content__inner--sm">
+    <header class="content__title">
+        <h1>@Model.Name</h1>
+        <small>شغل : @Model.SubJobName</small>
+
+        <div class="actions">
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/Admin/default.htm" class="dropdown-item">تازه سازی</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">مدیریت ویجت ها</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">تنظیمات</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="card profile">
+        <div class="profile__img">
+            <img src="/Admin/img/AdminImage/@Model.Image" alt="">
+        </div>
+
+        <div class="profile__info">
+
+            <ul class="icon-list">
+                <li><i class="zmdi zmdi-phone"></i> @Model.Phone</li>
+                <li><i class="zmdi zmdi-account-box-o"></i> @Model.UserName</li>
+                <li><i class="zmdi zmdi-key"></i> @Model.Password</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-body__title mb-4">درباره @Model.Name</h3>
+
+            <p>@Model.Description</p>
+
+            <br>
+
+            <h3 class="card-body__title mb-4">آدرس</h3>
+
+            <p>@Model.Address</p>
+
+            <br>
+
+            <h3 class="card-body__title mb-4">اطلاعات دیگر</h3>
+
+            <ul class="icon-list">
+                <li>
+                    <h5>وضعیت:</h5>
+                    @if (Model.IsActive)
+                    {
+                        <p>فعال</p>
+                    }
+                    else
+                    {
+                        <p>غیرفعال</p>
+                    }
+                </li>
+                <li>
+                    <h5>نوع ادمین:</h5>
+                    @if (Model.AdminRole == 1)
+                    {
+                        <p>ادمین اصلی</p>
+                    }
+                    else
+                    {
+                        <p>کارمند</p>
+                    }
+                </li>
+                <li><h5>درصد:</h5> @Model.Percent</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <button class="btn btn-light" data-toggle="dropdown" aria-expanded="false">عملیات</button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu--icon" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
+            <a class="btn btn-light btn--icon-text" href="/Admin/EditAdmin/@Model.Id"><i class="zmdi zmdi-edit"></i> ویرایش ادمین</a>
+
+            @if (Model.IsActive)
+            {
+                <a class="btn btn-light btn--icon-text" href="/Admin/MakeAdminNonActive/@Model.Id"><i class="zmdi zmdi-close-circle"></i>  غیرفعال کردن</a>
+            }
+            else
+            {
+                <a class="btn btn-light btn--icon-text" href="/Admin/ActivateAdmin/@Model.Id"><i class="zmdi zmdi-check"></i> فعال کردن</a>
+            }
+            <a class="btn btn-light btn--icon-text" href="/Admin/AdminPage/"><i class="zmdi zmdi-accounts-list"></i>بازگشت به لیست ادمین ها</a>
+        </div>
+    </div>
+</div>
+
+@section buttom{
+    <script src="/Admin/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/Admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script src="/Admin/js/app.min.js"></script>
+}

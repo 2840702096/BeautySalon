@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+<!--
+    **********************************************************************************************************
+    Copyright (c) 2017 It-Geeks
+    **********************************************************************************************************
+    -->
+<head>
+    <partial name="_MetaTags"></partial>
+    <title>Aveda Spa & Wellness - Multipurpose HTML5 Template For Hair, Beauty & Spa</title>
+    <!-- Bootstrap -->
+    <!-- Favicon -->
+    @RenderSection("Top")
+</head>
+<body>
+    <!--//================preloader  start==============//-->
+    <div class="preloader">
+        <div id="loading-center">
+            <img class="logo-nav" alt="" src="/assets/img/logo.png">
+            <div class="loader">
+            </div>
+        </div>
+    </div>
+    <!--//================preloader  end==============//-->
+    <!--//================Header start==============//-->
+    <header class="positionR">
+        <div id="main-menu" class="wa-main-menu">
+            <!-- Menu -->
+            <div class="wathemes-menu relative">
+                <!-- navbar -->
+                <div class="navbar navbar-default black-bg mar0" role="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="row">
+                                    <div class="navbar-header">
+                                        <!-- Button For Responsive toggle -->
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <!-- Logo -->
+                                        <a class="navbar-brand box" href="index.html">
+                                            <img class="logo-nav" alt="" src="/assets/img/logo.png">
+                                        </a>
+                                    </div>
+                                    <!-- Navbar Collapse -->
+                                    <div class="navbar-collapse collapse">
+                                        <!-- nav -->
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="/">home</a></li>
+
+                                            <li>
+                                                <a href="#">pages</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="booking.html">booking</a></li>
+                                                    <li><a href="booking.html">About Us</a></li>
+                                                    <li><a href="booking.html">Gallery</a></li>
+                                                    <li><a href="user-profile.html">user</a></li>
+                                                </ul>
+                                            </li>
+
+                                            @await Component.InvokeAsync("CategoryComponent")
+
+                                            @await Component.InvokeAsync("BlogCategoryComponent")
+
+                                            <li>
+                                                <a href="#">contact us</a>
+
+                                                @*<ul class="dropdown-menu">
+                                                    <li><a href="contact-us.html">Style 1</a></li>
+                                                    <li><a href="contact-us-style-2.html">Style 2</a></li>
+                                                </ul>*@
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- navbar-collapse -->
+                                </div>
+                            </div>
+                            <!-- col-md-12 -->
+                            <!-- col-md-3 -->
+                            <div class="col-md-4 col-sm-4">
+                                <div class="nav-seach-box">
+                                    <input type="text" name="search" class="search_terms" placeholder="Search">
+                                    <button class="button-style" type="submit" value=""><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                                @if (User.Identity.IsAuthenticated == true)
+                                {
+                                    <div class="navigation-icon custom-drop">
+                                        <ul class="social-icon top-bar-icon">
+                                            <li>
+                                                <a href="/SignOut" class="theme-circle marL10">
+                                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/Profile" class="theme-circle marL10">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="navigation-icon custom-drop">
+                                        <ul class="social-icon top-bar-icon">
+                                            <li>
+                                                <a href="/Account" class="theme-circle marL10">
+                                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                    SignIn
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                            <!-- col-md-3 -->
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- container -->
+                </div>
+                <!-- navbar -->
+            </div>
+            <!--  Menu -->
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer class="main_footer">
+        <div class="container">
+            <div class="new-letter-section marT50">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-12 new-letter-box-text">
+                        <h3>Our Newsletter</h3>
+                        <p>Contrary to popular belief, Lorem Ipsum</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-12">
+                        <div class="nav-seach-box">
+                            <input type="text" name="search" class="search_terms" placeholder="email@example.com">
+                            <button class="button-style" type="submit" value="">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-box padT50 padB30">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="foot-sec marB30">
+                            <h3 class="colorW marB20">About us</h3>
+                            <p>
+                                Lorem Ipsum is simply dummy text of the simply dummy printing typese tting
+                                and industry
+                            </p>
+                            <ul class="footer-icon-box">
+                                <li>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    <span>hello@gmail.com</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <span>P: 3333 222 1111</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    <span> 99 Barnard St States - GA 22222 </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="foot-sec marB30">
+                            <h3 class="colorW marB20">Customer care</h3>
+                            <ul class="pad0">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Site Map</a></li>
+                                <li><a href="#">Advanced Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="foot-sec marB30">
+                            <h3 class="colorW marB20">Your account</h3>
+                            <ul class="pad0">
+                                <li><a href="#">Sign In</a></li>
+                                <li><a href="#">View Cart</a></li>
+                                <li><a href="#">My Wishlist</a></li>
+                                <li><a href="#">Track My Order</a></li>
+                                <li><a href="#">Forum Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="foot-sec foot-img-box marB30">
+                            <h3 class="colorW marB20">Gallery</h3>
+                            <ul class="pad0">
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (1).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (2).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (3).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (4).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (5).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (6).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (7).jpg" alt=""></a></li>
+                                <li><a href="#"><img src="/assets/img/all/foot-001 (8).jpg" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-icons-section">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="foot-sec box1">
+                            <ul class="social-icon">
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="theme-circle marR10"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer padTB20 bagB">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 colorW">
+                        <p><a href="http://www.itgeeksin.com/"><span class="theme-color">© IT GEEKS</span></a></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 colorW">
+                        <ul class="bottom-footer-navigation">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="">Pages</a></li>
+                            <li><a href="service.html">Services</a></li>
+                            <li><a href="gallery-style-1.html">Portfolio</a></li>
+                            <li><a href="blog-full-with-sidebar.html">Blog</a></li>
+                            <li><a href="contact-us-style-2.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--//================Quick view Start ==============//-->
+    <div class="quick-vive-popap">
+        <div class="container">
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="Quick-view-popup modal-content text-left">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="col-md-12 col-xs-12 popap-open-box">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 marB30">
+                                            <figure>
+                                                <img src="/assets/img/all/product-detail.jpg" alt="">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 responsive-top">
+                                    <h3 class="theme-headdings text-left  product-detail-title s"><a href="#">Your Product Title</a></h3>
+                                    <div class="star-box-section left product-det text-left padT15">
+                                        <ul>
+                                            <li>
+                                                <p>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="star-code fa fa-star-half-o" aria-hidden="true"></i>
+                                                </p>
+                                            </li>
+                                            <li class="border-left-site">(3) Reviews</li>
+                                            <li class="border-left-site">Add a Review</li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="per-box texy-left marT15">
+                                        <p>Morbi mollis vestibulum sollicitudin. in eros a justo facilisis rutrum. Aenean id ullamcorper libero. tempor et purus vitae, consectetur varius nunc.</p>
+                                    </div>
+                                    <div class="product-detail-btn  padT15">
+                                        <div class="form-row col-sm-5 col-xs-12 country-boxs billing-box select ">
+                                            <div class="row">
+                                                <p>
+                                                    <label for="billing_state28">Material</label>
+                                                    <select class="billing_state28" id="billing_state28" name="billing_state">
+                                                        <option value="">Select Color</option>
+                                                        <option value="AP">Red</option>
+                                                        <option value="AR">Blue</option>
+                                                        <option value="AS">Green</option>
+                                                        <option value="BR">Yellow</option>
+                                                        <option value="CT">Black</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-row col-sm-5 country-boxs billing-box select down ">
+                                            <div class="row ">
+                                                <p>
+                                                    <label for="billing_state27">Size</label>
+                                                    <select class="billg_state" id="billing_state27" name="billing_state">
+                                                        <option value="">Select Size</option>
+                                                        <option value="AP">S</option>
+                                                        <option value="AR">L</option>
+                                                        <option value="AS">M</option>
+                                                        <option value="BR">XL</option>
+                                                        <option value="CT">XXL</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-5 row">
+                                        <div class="order-data box order-table ">
+                                            <div class="order-table-cell order-text product-input-type">
+                                                <input type="number" value="01" class="qty" name="qty1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-7 product-box-btm-blog row">
+                                        <a href="" class="itg-button light pro btn left marT">Add To Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//================Quick view End ==============//-->
+    <!--//================color Switcher Start==============//-->
+    <div id="style-switcher" style="left: 0px;">
+        <h2>Choose Color<a href="#"><i class="fa fa-cog fa-spin"></i></a></h2>
+        <div>
+            <ul class="colors" id="color1">
+                <li>
+                    <a href="#" class="color"></a>
+                </li>
+                <li>
+                    <a href="#" class="color1 active"></a>
+                </li>
+                <li>
+                    <a href="#" class="color2"></a>
+                </li>
+                <li>
+                    <a href="#" class="color3"></a>
+                </li>
+                <li>
+                    <a href="#" class="color4"></a>
+                </li>
+                <li>
+                    <a href="#" class="color5"></a>
+                </li>
+                <li>
+                    <a href="#" class="color6"></a>
+                </li>
+                <li>
+                    <a href="#" class="color7"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--//================color Switcher End==============//-->
+    <!--//================Footer end==============//-->
+    @RenderSection("Bottom")
+</body>
+</html>

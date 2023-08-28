@@ -1,0 +1,147 @@
+﻿@model BeautySalon.Models.ViewModels.ReservationViewModel
+
+@section Top {
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <!-- Master Css -->
+    <link href="/main.css" rel="stylesheet">
+    <link href="/assets/css/color.css" rel="stylesheet" id="colors">
+}
+
+<div class="clear"></div>
+<!--//================Bredcrumb starts==============//-->
+<section>
+    <div class="bredcrumb-section padTB100 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-head">
+                        <div class="page-header-heading">
+                            <h3 class="theme-color">Reservation</h3>
+                        </div>
+                        <div class="breadcrumb-box">
+                            <ul class="breadcrumb colorW marB0">
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li class="active">Reservation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//================Bredcrumb end==============//-->
+<div class="clear"></div>
+<!--//================Book Table start==============//-->
+<section class="padT100 padB70">
+    <!--- Theme heading start-->
+    <div class="theme-heading marB50 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+                    <h1>Reservation</h1>
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+                    <p>
+                        You Won't Be Disapointed For Choosing Us
+                    </p>
+                    <div class="alert alert-warning" style="margin-top:7%">
+                        توجه داشته باشید که برای صحت عملیات حتما باید مرحله به مرحله اطلاعات زیر را انتخاب کنید
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- Theme heading end-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+                <div class="theme-form marB30">
+                    <div class="row">
+                        @if (ViewBag.ImPerfectProfile != null)
+                        {
+                            <div class="alert alert-danger" style="text-align:right">
+                                پروفایل شما تکمیل نشده است! برای انجام رزرواسیون باید پروفایل کاملی داشته باشید
+                            </div>
+                        }
+                        <form asp-action="CreateAReservation" dir="rtl">
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                <select type="text"  id="PersonelId" asp-items="@(ViewBag.Personel as SelectList)"></select>
+                                <i style="margin:2%" class="fa fa-user input" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                <select type="text"  id="DayId" asp-items="@(ViewBag.Day as SelectList)"></select>
+                                <i style="margin:2%" class="fa fa-calendar input" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
+                                <select type="text"  asp-for="TimeId" id="TimeId" asp-items="@(ViewBag.WorkingTime as SelectList)"></select>
+                                <i style="margin:2%" class="fa fa-clock-o input" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 marB20 positionR">
+                                <textarea asp-for="Description"  rows="6"></textarea>
+                                <i style="margin:2%" class="fa fa-comment input" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" >
+                                <button type="submit" class="itg-button light">ثبت رزرواسیون</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//================Book Table end==============//-->
+<div class="clear"></div>
+
+@section Bottom {
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+    <script src="/assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+    <script src="/assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="/assets/plugin/acordian/js/jquery-ui.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+    <script src="/assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+    <script src="/assets/plugin/switcher/js/switcher.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.appear.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <script>
+        $("#PersonelId").click(function () {
+            $("#DayId").empty();
+            var Id = $("#PersonelId :selected").val();
+            $.ajax({
+                type: "GET",
+                url: '/Services/WorkingDaySettings/' + Id,
+                success: function (data) {
+                    $.each(data,
+                        function () {
+                            $("#DayId").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                }
+            });
+
+        });
+
+        $("#DayId").click(function () {
+            $("#TimeId").empty();
+            var Id = $("#DayId :selected").val();
+            $.ajax({
+                type: "GET",
+                url: '/Services/WorkingTimeSettings/' + Id,
+                success: function (data) {
+                    $.each(data,
+                        function () {
+                            $("#TimeId").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                }
+            });
+
+        });
+    </script>
+}

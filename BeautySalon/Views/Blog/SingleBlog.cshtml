@@ -1,0 +1,89 @@
+﻿@model Weblogs
+
+@section Top{
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Master Css -->
+
+    <link href="/main.css" rel="stylesheet">
+
+    <link href="/assets/css/color.css" rel="stylesheet" id="colors">
+}
+
+<div class="clear"></div>
+
+<!--//================Bredcrumb starts==============//-->
+<section>
+    <div class="bredcrumb-section padTB100 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-head">
+                        <div class="page-header-heading">
+                            <h3 class="theme-color">Blog</h3>
+                        </div>
+                        <div class="breadcrumb-box">
+                            <ul class="breadcrumb colorW marB0">
+                                <li>
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li class="active">Blog</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--//================Bredcrumb end==============//-->
+
+<div class="clear"></div>
+
+<!--//================Blog start==============//-->
+
+<section class="padT100 padB70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="blog full border-bottom padB20 marB50 ">
+                    <figure class="marB20">
+                        <img src="/Admin/img/WeblogImages/@Model.ImageName" alt="">
+                    </figure>
+                    <div style="text-align:right">
+                        <h3 class="marB20">@Model.WeblogTitle</h3>
+                        <p>
+                            <a href="#"><span class="marR10"><i class="fa fa-calendar marR5" aria-hidden="true"></i>@PersianDate.ToPersianDateString(Model.CreateDate)</span></a>
+                        </p>
+                        <p>
+                            @Model.WeblogBody
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--//================Blog end==============//-->
+
+<div class="clear"></div>
+
+@section Bottom{
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/plugin/megamenu/js/hover-dropdown-menu.js"></script>
+    <script src="/assets/plugin/megamenu/js/jquery.hover-dropdown-menu-addon.js"></script>
+    <script src="/assets/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="/assets/plugin/acordian/js/jquery-ui.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox.pack.js"></script>
+    <script src="/assets/plugin/fancyBox/js/jquery.fancybox-media.js"></script>
+    <script src="/assets/plugin/vertical-slider/js/jquery.bxslider.js"></script>
+    <script src="/assets/plugin/switcher/js/switcher.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="/assets/plugin/counter/js/jquery.appear.js"></script>
+    <script src="/assets/js/main.js"></script>
+}

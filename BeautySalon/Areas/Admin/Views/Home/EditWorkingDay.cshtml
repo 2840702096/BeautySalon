@@ -1,0 +1,149 @@
+﻿@model EditWorkingDayViewModel
+@{
+}
+
+@section Top
+    {
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/dropzone/dist/dropzone.css">
+    <!--<link rel="stylesheet" href="/Admin/vendors/bower_components/flatpickr/dist/flatpickr.min.css" />-->
+    <link href="/Admin/css/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/nouislider/distribute/nouislider.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/rateYo/min/jquery.rateyo.min.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/Admin/css/app.min.css">
+
+    <!-- Demo only -->
+    <link rel="stylesheet" href="/Admin/demo/css/demo.css">
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">ویرایش روزکاری</h4>
+        <form asp-action="EditWorkingDay" enctype="multipart/form-data" method="post">
+            <h3 class="card-body__title">روز</h3>
+
+            <div class="">
+                <div class="form-group">
+
+                    <select asp-for="Name" class="form-control" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                        <option value=""></option>
+                        <option style="color:black" value="شنبه">شنبه</option>
+                        <option style="color:black" value="یکشنبه">یکشنبه</option>
+                        <option style="color:black" value="دوشنبه">دوشنبه</option>
+                        <option style="color:black" value="سه شنبه">سه شنبه</option>
+                        <option style="color:black" value="چهارشنبه">چهارشنبه</option>
+                        <option style="color:black" value="پنج شنبه">پنج شنبه</option>
+                        <option style="color:black" value="جمعه">جمعه</option>
+                    </select>
+                </div>
+            </div>
+            <span style="color:red" class="text-danger" asp-validation-for="Name"></span>
+
+            <h3 class="card-body__title">تاریخ</h3>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                <div class="form-group">
+                    <input asp-for="Date" type="text" class="form-control multiple" placeholder="" data-mdpersiandatetimepicker="" data-original-title="" title="">
+
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+            <span style="color:red" class="text-danger" asp-validation-for="Date"></span>
+
+            @if (ViewBag.TheExistDay != null)
+            {
+                <p style="color:red">این تاریخ قبلا انتخاب شده است.</p>
+            }
+            @if (ViewBag.TodayOfADayBeforeToday != null)
+            {
+                <p style="color:red">تاریخ انتخاب شده باید تاریخی غیر از روزهای قبلی باشد.</p>
+            }
+
+            <div class="mt-5">
+                <h3 class="card-body__title">ساعت</h3>
+
+                <div class="col-sm-6 m-3">
+                    <label>ساعت شروع</label>
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input asp-for="StartTime" style="font-size:140%" type="time" class="form-control" placeholder="" data-mdpersiandatetimepicker="" data-original-title="" title="">
+
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+                <span style="color:red" class="text-danger" asp-validation-for="StartTime"></span>
+
+                <div class="col-sm-6 m-3">
+                    <label>ساعت پایان</label>
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input asp-for="EndTime" style="font-size:140%" type="time" class="form-control" placeholder="" data-mdpersiandatetimepicker="" data-original-title="" title="">
+
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+                <span style="color:red" class="text-danger" asp-validation-for="EndTime"></span>
+            </div>
+
+            <div class="form-group mb-0 mt-5">
+                <div class="product-buttons text-center">
+                    <button class="btn btn-light btn--icon-text" type="submit"><i class="zmdi zmdi-edit"></i> ویرایش</button>
+                    <a class="btn btn-light btn--icon-text" href="/Admin/WorkingDays" class="btn btn-light"><i class="zmdi zmdi-arrow-back"></i>بازگشت</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section buttom
+    {
+    <script src="/Admin/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/Admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+    <script src="/Admin/vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script src="/Admin/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="/Admin/vendors/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="/Admin/vendors/bower_components/moment/min/moment.min.js"></script>
+    <!--<script src="/Admin/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>-->
+    <script src="/Admin/js/jquery.md.bootstrap.datetimepicker.js"></script>
+    <script src="/Admin/vendors/bower_components/nouislider/distribute/nouislider.min.js"></script>
+    <script src="/Admin/vendors/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script src="/Admin/vendors/bower_components/trumbowyg/dist/trumbowyg.min.js"></script>
+    <script src="/Admin/vendors/bower_components/rateYo/min/jquery.rateyo.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery-text-counter/textcounter.min.js"></script>
+    <script src="/Admin/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script src="/Admin/js/app.min.js"></script>
+    <script>
+        $('.datetime-picker1').MdPersianDateTimePicker({
+            targetTextSelector: '.datetime-picker1',
+            targetDateSelector: '.miladi',
+            dateFormat: 'yyyy-MM-dd',
+            isGregorian: false,
+            enableTimePicker: true,
+            //disableBeforeToday: true
+        });
+        $('.multiple').MdPersianDateTimePicker({
+            targetTextSelector: '.multiple',
+            monthsToShow: [1, 1]
+        });
+    </script>
+
+}
