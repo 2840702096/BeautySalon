@@ -1,6 +1,7 @@
 ﻿using BeautySalon.Models;
 using BeautySalon.Models.Context;
 using BeautySalon.Models.Services.Interfaces;
+using BeautySalon.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -109,6 +110,35 @@ namespace BeautySalon.Controllers
         {
             var Detail = _context.Admin.Find(id);
             return View(Detail);
+        }
+
+        #endregion
+
+        #region AboutUs
+
+        [Route("/AboutUs")]
+        public IActionResult AboutUs()
+        {
+            AboutUsViewModel AboutUs = _context.AboutUs.Select(a => new AboutUsViewModel
+            {
+                Title = a.Title,
+                Body = a.Body
+            }).Single();
+
+            ViewBag.Employees = _context.Admin.Where(a => a.IsActive == true && a.AdminRole == 2).ToList();
+
+            return View(AboutUs);
+        }
+
+        #endregion
+
+        #region Gallery
+
+        [Route("/Gallery")]
+        public IActionResult Gallery()
+        {
+            var Images = _context.Gallery.ToList();
+            return View(Images);
         }
 
         #endregion
