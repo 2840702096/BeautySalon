@@ -41,7 +41,6 @@ namespace BeautySalon.Models.Context
         public DbSet<Weblogs> Weblogs { get; set; }
         public DbSet<Gallery> Gallery { get; set; }
         public DbSet<Specifications> Specifications { get; set; }
-        public DbSet<AboutUs> AboutUs { get; set; }
 
         #endregion
 

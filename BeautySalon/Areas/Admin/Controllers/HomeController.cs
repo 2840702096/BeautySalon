@@ -1340,37 +1340,5 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #endregion
 
-        #region AboutUs
-
-        [Area("Admin")]
-        [Route("/Admin/AboutUs")]
-        public IActionResult AboutUs()
-        {
-            AboutUsViewModel AboutUs = _context.AboutUs.Select(a => new AboutUsViewModel
-            {
-                Title = a.Title,
-                Body = a.Body
-            }).Single();
-
-            return View(AboutUs);
-        }
-
-        [Area("Admin")]
-        [Route("/Admin/EditAboutUsPassage")]
-        public IActionResult EditAboutUsPassage(AboutUsViewModel aboutUs)
-        {
-            var AboutUs = _context.AboutUs.First();
-
-            AboutUs.Title = aboutUs.Title;
-            AboutUs.Body = aboutUs.Body;
-
-            _context.Update(AboutUs);
-            _context.SaveChanges();
-
-            return Redirect("/Admin/AboutUs");
-        }
-
-        #endregion
-
     }
 }

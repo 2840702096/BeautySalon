@@ -15,7 +15,6 @@
 
 @{
     List<BeautySalon.Models.Entities.Gallery> Gallery = ViewBag.Gallery;
-    List<WorkingDays> Day = ViewBag.WorkingDays;
 }
 
 <!--//================Header end==============//-->
@@ -285,69 +284,36 @@ else
 
 <div class="clear"></div>
 <!--//================Video start==============//-->
-    @if (Day.Count() != 0)
-{
-    <section class="opening-sec-box">
-        <div class="special-style overlay">
-            <div class="special-video-image parallax-style"></div>
-        </div>
-        <div class="padT100 padB70">
-            <!--- Theme heading start-->
-            <div class="theme-heading background marB50 positionR">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
-                            <h1>Opening hours</h1>
-                            <div class="heading-lines"><span class="saf-boxs"></span></div>
-                        </div>
+<section class="opening-sec-box">
+    <div class="special-style overlay">
+        <div class="special-video-image parallax-style"></div>
+    </div>
+    <div class="padT100 padB70">
+        <!--- Theme heading start-->
+        <div class="theme-heading background marB50 positionR">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+                        <h1>Opening hours</h1>
+                        <div class="heading-lines"><span class="saf-boxs"></span></div>
                     </div>
                 </div>
             </div>
-            <!--- Theme heading end-->
-            <div class="container">
-                <div class="opening-box text-center">
-                    @foreach (var Item in ViewBag.WorkingDays)
-                    {
-                        <div class="opening-hours pad40">
-                            <h2>@Item.Name</h2>
-                            <h1>@string.Format("{0:00}:{1:00}", Item.StartTime.Hours,Item.StartTime.Minutes) to @string.Format("{0:00}:{1:00}", Item.EndTime.Hours,Item.EndTime.Minutes)</h1>
-                        </div>
-                    }
-                </div>
-            </div>
         </div>
-    </section>
-}
-else
-{
-    <section class="opening-sec-box">
-        <div class="special-style overlay">
-            <div class="special-video-image parallax-style"></div>
-        </div>
-        <div class="padT100 padB70">
-            <!--- Theme heading start-->
-            <div class="theme-heading background marB50 positionR">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
-                            <h1>Opening hours</h1>
-                            <div class="heading-lines"><span class="saf-boxs"></span></div>
-                            <p style="font-size:110%">
-                                فعلا روز بازی وجود ندارد
-                            </p>
-                        </div>
+        <!--- Theme heading end-->
+        <div class="container">
+            <div class="opening-box text-center">
+                @foreach (var Item in ViewBag.WorkingDays)
+                {
+                    <div class="opening-hours pad40">
+                        <h2>@Item.Name</h2>
+                        <h1>@string.Format("{0:00}:{1:00}", Item.StartTime.Hours,Item.StartTime.Minutes) to @string.Format("{0:00}:{1:00}", Item.EndTime.Hours,Item.EndTime.Minutes)</h1>
                     </div>
-                </div>
-            </div>
-            <!--- Theme heading end-->
-            <div class="container">
-                <div class="opening-box text-center">
-                    <div class="alert alert-danger"></div>
-                </div>
+                }
             </div>
         </div>
-    </section>
-}
+    </div>
+</section>
 <!--//================Video end==============//-->
 <div class="clear"></div>
 @if (Gallery.Count < 6)
