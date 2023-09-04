@@ -121,6 +121,11 @@ namespace BeautySalon.Controllers
         [Route("/Services/CreateAReservation")]
         public IActionResult CreateAReservation( ReservationViewModel reservation)
         {
+            if(!ModelState.IsValid)
+            {
+                return Redirect("/Home/Index");
+            }
+
             WorkingTime WT = _context.WorkingTime.Find(reservation.TimeId);
 
             int UserId = int.Parse(User.Identity.GetId());

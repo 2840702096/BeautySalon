@@ -57,6 +57,10 @@
                                     {
                                         <p style="color:red; text-align:right">لطفا شماره تلفن خود را وراد کنید</p>
                                     }
+                                    @if (ViewBag.WrongCode != null)
+                                    {
+                                        <p style="color:red">کد وارد شده اشتباه است. دوباره امتحان کنید</p>
+                                    }
 
                                     <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
                                     </div>
@@ -71,7 +75,7 @@
                             <form asp-action="LoginSubAdmin">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 marB10 positionR">
-                                        <input style="text-align:right" type="password" placeholder="کلمه عبور" name="password">
+                                        <input style="text-align:center; font-size:90%" type="password" placeholder="کلمه عبور" name="password">
                                         <i class="fa fa-lock input" aria-hidden="true"></i>
                                     </div>
                                     @if (ViewBag.NullPassword != null)

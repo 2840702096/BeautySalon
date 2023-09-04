@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Areas;
+using System;
+using RestSharp;
 
 namespace BeautySalon.Controllers
 {
@@ -53,14 +55,49 @@ namespace BeautySalon.Controllers
             else if (_context.User.Any(u => u.Phone == phone))
             {
                 ViewBag.LoginOrRegister = 1;
-                ViewBag.Phone = phone;
+
+                var User = _context.User.SingleOrDefault(u => u.Phone == phone);
+                if (User != null)
+                {
+                    var R = new Random();
+                    int Rn = R.Next(1000, 9999);
+                    string code = Rn.ToString();
+                    var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.GET);
+                    IRestResponse response = client.Execute(request);
+                    User.ValidationCode = code;
+                    _context.User.Update(User);
+                    _context.SaveChanges();
+                    ViewBag.Phone = phone;
+
+                    return View("CodeVerification");
+                }
+
                 return View("CodeVerification");
-                
             }
             else
             {
                 ViewBag.LoginOrRegister = 2;
+
+                User User = new User();
+                User.Phone = phone;
+                User.ImageName = "Default.png";
+                _context.Add(User);
+                _context.SaveChanges();
+
+                var R = new Random();
+                int Rn = R.Next(1000, 9999);
+                string code = Rn.ToString();
+                var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                User.ValidationCode = code;
+                _context.User.Update(User);
+                _context.SaveChanges();
                 ViewBag.Phone = phone;
+
                 return View("CodeVerification");
             }
 
@@ -68,15 +105,11 @@ namespace BeautySalon.Controllers
         }
 
         [Route("/FinalSignIn")]
-        public IActionResult FinalSignIn(string verificationCode, string phone, int loginOrRegister)
+        public IActionResult FinalSignIn(string validationCode, string phone, int loginOrRegister)
         {
-            if(loginOrRegister == 1)
+            var User = _context.User.SingleOrDefault(u => u.Phone == phone);
+            if (User.ValidationCode == validationCode)
             {
-                var User = _context.User.SingleOrDefault(u => u.Phone == phone);
-                User.ValidationCode = int.Parse(verificationCode);
-                _context.Update(User);
-                _context.SaveChanges();
-
                 var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier,User.id.ToString()),
@@ -90,35 +123,16 @@ namespace BeautySalon.Controllers
                     IsPersistent = true
                 };
                 HttpContext.SignInAsync(principal, properties);
-                return Redirect("/");
+                return Redirect("/Profile");
             }
             else
             {
-                User User = new User();
-                User.Phone = phone;
-                User.ValidationCode = int.Parse(verificationCode);
-                User.ImageName = "Default.png";
-                _context.Add(User);
-                _context.SaveChanges();
-
-                var claims = new List<Claim>()
-                    {
-                        new Claim(ClaimTypes.NameIdentifier,User.id.ToString()),
-                        new Claim(ClaimTypes.MobilePhone,User.Phone)
-                    };
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-
-                var properties = new AuthenticationProperties
-                {
-                    IsPersistent = true
-                };
-                HttpContext.SignInAsync(principal, properties);
-                return Redirect("/");
+                ViewBag.WrongCode = true;
+                return View("Index");
             }
         }
 
-            [Route("/LoginSubAdmin")]
+        [Route("/LoginSubAdmin")]
         public IActionResult LoginSubAdmin(string password, string phone)
         {
             if (password == null)

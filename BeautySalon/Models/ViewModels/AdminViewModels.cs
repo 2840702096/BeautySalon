@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace BeautySalon.Models.ViewModels
 {
@@ -343,6 +342,48 @@ namespace BeautySalon.Models.ViewModels
         public string SpecificationBody { get; set; }
         public IFormFile ImageName { get; set; }
 
+        public string CurrentImage { get; set; }
+    }
+
+    #endregion
+
+    #region AboutUs
+
+    public class AboutUsViewModel
+    {
+        [Display(Name = "عنوان")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Title { get; set; }
+
+        [Display(Name = "متن")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Body { get; set; }
+    }
+
+    #endregion
+
+    #region Partners
+
+    public class CreatePartnerViewModel
+    {
+        [Display(Name = "عنوان")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Title { get; set; }
+
+        [Display(Name = "عکس")]
+        [Required(ErrorMessage = "لطفا {0} را انتخاب کنید")]
+        public IFormFile ImageName { get; set; }
+    }
+
+    public class EditPartnerViewModel
+    {
+        [Display(Name = "عنوان")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Title { get; set; }
+        public IFormFile ImageName { get; set; }
         public string CurrentImage { get; set; }
     }
 

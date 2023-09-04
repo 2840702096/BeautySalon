@@ -44,6 +44,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharpSigned" Version="105.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +103,8 @@
     <Folder Include="wwwroot\Admin\img\AdminImage\" />
     <Folder Include="wwwroot\Admin\img\GalleryThumbNail\" />
     <Folder Include="wwwroot\Admin\img\GalleryImages\" />
+    <Folder Include="wwwroot\Admin\img\PartnerThumbnails\" />
+    <Folder Include="wwwroot\Admin\img\PartnerImages\" />
     <Folder Include="wwwroot\Admin\img\SpecificationTumbnails\" />
     <Folder Include="wwwroot\Admin\img\SpecificationImages\" />
     <Folder Include="wwwroot\Admin\img\WeblogThumbNail\" />

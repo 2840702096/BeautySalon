@@ -4,6 +4,7 @@ using BeautySalon.Models.Services.Interfaces;
 using BeautySalon.Models.Tools;
 using BeautySalon.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ using System.Reflection;
 
 namespace BeautySalon.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
         private readonly SalonContext _context;
@@ -33,7 +35,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             _helpingService = helpingService;
         }
 
-        [Area("Admin")]
+
         public IActionResult Index()
         {
             return View();
@@ -41,7 +43,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region JobList
 
-        [Area("Admin")]
+
         [Route("/Admin/JobList")]
         public IActionResult JobList()
         {
@@ -52,14 +54,14 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region CreateJob
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateJob")]
         public IActionResult CreateJob()
         {
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateJob")]
         [HttpPost]
         public IActionResult CreateJob(CreateJobViewModel job)
@@ -92,7 +94,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditJob
 
-        [Area("Admin")]
+
         [Route("/Admin/EditJob/{id}")]
         public IActionResult EditJob(int id)
         {
@@ -105,7 +107,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Job);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditJob/{id}")]
         [HttpPost]
         public IActionResult EditJob(int id, EditJobViewModel updatedJob, string currentImage)
@@ -150,7 +152,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateJob/{id}")]
         public IActionResult ActivateJob(int id)
         {
@@ -163,7 +165,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect("/Admin/JobList");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeJobNonActive/{id}")]
         public IActionResult MakeJobNonActive(int id)
         {
@@ -180,7 +182,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region SubJob
 
-        [Area("Admin")]
+
         [Route("/Admin/SubJobList/{id}")]
         public IActionResult SubJobList(int id, string title)
         {
@@ -194,7 +196,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Description
 
-        [Area("Admin")]
+
         [Route("/Admin/SubJobDescription/{id}")]
         public IActionResult SubJobDescription(int id, string description)
         {
@@ -209,7 +211,7 @@ namespace BeautySalon.Areas.Admin.Controllers
         #region CreateSubJob
 
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateSubJob/{id}")]
         public IActionResult CreateSubJob(int id, string title)
         {
@@ -218,7 +220,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateSubJob/{id}")]
         [HttpPost]
         public IActionResult CreateSubJob(int id, string title, CreateSubJobViewModel subJob)
@@ -259,7 +261,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditSubJob
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSubJob/{id}")]
         public IActionResult EditSubJob(int id, int parentId)
         {
@@ -278,7 +280,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(SubJob);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSubJob/{id}")]
         [HttpPost]
         public IActionResult EditSubJob(int id, EditSubJobViewModel updatedSubJob, string currentImage)
@@ -315,7 +317,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateSubJob/{id}")]
         public IActionResult ActivateSubJob(int id, int parentId)
         {
@@ -328,7 +330,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/SubJobList/{parentId}");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeSubJobNonActive/{id}")]
         public IActionResult MakeSubJobNonActive(int id, int parentId)
         {
@@ -349,7 +351,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Admin
 
-        [Area("Admin")]
+
         [Route("/Admin/AdminPage")]
         public IActionResult AdminPage()
         {
@@ -358,7 +360,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Admins);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/AdminSpecification/{id}")]
         public IActionResult AdminSpecification(int id)
         {
@@ -367,7 +369,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region CreateAdmin
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateAdmin")]
         public IActionResult CreateAdmin()
         {
@@ -375,7 +377,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateAdmin")]
         [HttpPost]
         public IActionResult CreateAdmin(CreateAdminViewModel newAdmin)
@@ -419,7 +421,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditAdmin
 
-        [Area("Admin")]
+
         [Route("/Admin/EditAdmin/{id}")]
         public IActionResult EditAdmin(int id)
         {
@@ -442,7 +444,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Admin);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditAdmin/{id}")]
         [HttpPost]
         public IActionResult EditAdmin(int id, EditAdminViewModel updatedAdmin, string currentImage)
@@ -484,7 +486,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateAdmin/{id}")]
         public IActionResult ActivateAdmin(int id)
         {
@@ -497,7 +499,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/AdminSpecification/{id}");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeAdminNonActive/{id}")]
         public IActionResult MakeAdminNonActive(int id)
         {
@@ -516,7 +518,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region WorkingDays
 
-        [Area("Admin")]
+
         [Route("/Admin/WorkingDays")]
         public IActionResult WorkingDays()
         {
@@ -533,14 +535,14 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region CreateWorkingDay
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateWorkingDay")]
         public IActionResult CreateWorkingDay()
         {
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateWorkingDay")]
         [HttpPost]
         public IActionResult CreateWorkingDay(CreateWorkingDayViewModel day)
@@ -585,7 +587,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditWorkingDay
 
-        [Area("Admin")]
+
         [Route("/Admin/EditWorkingDay/{id}")]
         public IActionResult EditWorkingDay(int id)
         {
@@ -599,7 +601,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Day);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditWorkingDay/{id}")]
         [HttpPost]
         public IActionResult EditWorkingDay(int id, EditWorkingDayViewModel newDay)
@@ -640,7 +642,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateDay/{id}")]
         public IActionResult ActivateDay(int id)
         {
@@ -653,7 +655,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/WorkingDays");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeDayNonActive/{id}")]
         public IActionResult MakeDayNonActive(int id)
         {
@@ -670,7 +672,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Delete
 
-        [Area("Admin")]
+
         [Route("/Admin/DeleteWorkingDay/{id}")]
         public IActionResult DeleteWorkingDay(int id)
         {
@@ -697,7 +699,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region WorkingTimes
 
-        [Area("Admin")]
+
         [Route("/Admin/WorkingTimes")]
         public IActionResult WorkingTimes()
         {
@@ -720,7 +722,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Sliders
 
-        [Area("Admin")]
+
         [Route("/Admin/Sliders")]
         public IActionResult Sliders()
         {
@@ -731,14 +733,14 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region CreateSlider
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateSlider")]
         public IActionResult CreateSlider()
         {
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateSlider")]
         [HttpPost]
         public IActionResult CreateSlider(CreateSliderAndBannerViewModel slider)
@@ -774,7 +776,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditSlider
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSlider/{id}")]
         public IActionResult EditSlider(int id)
         {
@@ -789,7 +791,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(CurrentSlider);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSlider/{id}")]
         [HttpPost]
         public IActionResult EditSlider(int id, EditSliderAndBannerViewModel updatedSlider, string currentImage)
@@ -823,7 +825,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateSlider/{id}")]
         public IActionResult ActivateSlider(int id)
         {
@@ -836,7 +838,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/Sliders");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeSliderNonActive/{id}")]
         public IActionResult MakeSliderNonActive(int id)
         {
@@ -853,7 +855,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region DeleteSlider
 
-        [Area("Admin")]
+
         [Route("/Admin/DeleteSlider/{id}")]
         public IActionResult DeleteSlider(int id, string image)
         {
@@ -885,7 +887,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Weblogs
 
-        [Area("Admin")]
+
         [Route("/Admin/Weblogs")]
         public IActionResult Weblogs()
         {
@@ -893,7 +895,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Weblog);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/WeblogBody")]
         public IActionResult WeblogBody(string body)
         {
@@ -904,7 +906,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region CreateWeblog
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateWeblog")]
         public IActionResult CreateWeblog()
         {
@@ -913,7 +915,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/CreateWeblog")]
         [HttpPost]
         public IActionResult CreateWeblog(CreateWeblogViewModel weblog)
@@ -953,7 +955,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditWeblog
 
-        [Area("Admin")]
+
         [Route("/Admin/EditWeblog/{id}")]
         public IActionResult EditWeblog(int id)
         {
@@ -971,7 +973,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(CurrentSlider);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditWeblog/{id}")]
         [HttpPost]
         public IActionResult EditWeblog(int id, EditWeblogViewModel updatedWeblog, string currentImage)
@@ -1009,7 +1011,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateWeblog/{id}")]
         public IActionResult ActivateWeblog(int id)
         {
@@ -1022,7 +1024,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/Weblogs");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeWeblogNonActive/{id}")]
         public IActionResult MakeWeblogNonActive(int id)
         {
@@ -1039,7 +1041,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region DeleteWeblog
 
-        [Area("Admin")]
+
         [Route("/Admin/DeleteWeblog/{id}")]
         public IActionResult DeleteWeblog(int id, string image)
         {
@@ -1071,7 +1073,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Users
 
-        [Area("Admin")]
+
         [Route("/Admin/Users")]
         public IActionResult Users()
         {
@@ -1086,7 +1088,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Specifications
 
-        [Area("Admin")]
+
         [Route("/Admin/SpecificationsOfBeautySalon")]
         public IActionResult SpecificationsOfBeautySalon()
         {
@@ -1095,7 +1097,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Specifications);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/SpecificationBody")]
         public IActionResult SpecificationBody(string body)
         {
@@ -1105,7 +1107,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region EditSpecification
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSpecification/{id}")]
         public IActionResult EditSpecification(int id)
         {
@@ -1119,7 +1121,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View(Specification);
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/EditSpecification/{id}")]
         [HttpPost]
         public IActionResult EditSpecification(int id, EditSpecificationViewModel specifications, string currentImage)
@@ -1147,7 +1149,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateSpecification/{id}")]
         public IActionResult ActivateSpecification(int id)
         {
@@ -1162,7 +1164,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/Weblogs");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeSpecificationNonActive/{id}")]
         public IActionResult MakeSpecificationNonActive(int id)
         {
@@ -1181,7 +1183,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Gallery
 
-        [Area("Admin")]
+
         [Route("/Admin/Gallery")]
         public IActionResult Gallery()
         {
@@ -1192,14 +1194,14 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region AddImageToGallery
 
-        [Area("Admin")]
+
         [Route("/Admin/AddImageToGallery")]
         public IActionResult AddImageToGallery()
         {
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/AddImageToGallery")]
         [HttpPost]
         public IActionResult AddImageToGallery(AddImageToGalleryViewModel addImage)
@@ -1230,7 +1232,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Activation
 
-        [Area("Admin")]
+
         [Route("/Admin/ActivateImage/{id}")]
         public IActionResult ActivateImage(int id)
         {
@@ -1243,7 +1245,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/Gallery");
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/MakeImageNonActive/{id}")]
         public IActionResult MakeImageNonActive(int id)
         {
@@ -1256,11 +1258,11 @@ namespace BeautySalon.Areas.Admin.Controllers
             return Redirect($"/Admin/Gallery");
         }
 
-            #endregion
+        #endregion
 
         #region DeleteImageFromGallery
 
-            [Area("Admin")]
+
         [Route("/Admin/DeleteImageFromGallery/{id}")]
         public IActionResult DeleteImageFromGallery(int id, string currentImage)
         {
@@ -1293,7 +1295,7 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #region Reservations
 
-        [Area("Admin")]
+
         [Route("/Admin/Reservations")]
         public IActionResult Reservations()
         {
@@ -1301,7 +1303,7 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/ReservationDescription/{id}")]
         public IActionResult ReservationDescription(int id)
         {
@@ -1310,19 +1312,19 @@ namespace BeautySalon.Areas.Admin.Controllers
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/FinalPayment/{id}")]
         public IActionResult FinalPayment(int id)
         {
             return View();
         }
 
-        [Area("Admin")]
+
         [Route("/Admin/FinalPayment/{id}")]
         [HttpPost]
         public IActionResult FinalPayment(int id, int finalPayment)
         {
-            if(finalPayment == 0)
+            if (finalPayment == 0)
             {
                 ViewBag.Error = true;
                 return View();
@@ -1340,5 +1342,186 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         #endregion
 
+        #region AboutUs
+
+        [Route("/Admin/AboutUs")]
+        public IActionResult AboutUs()
+        {
+            AboutUsViewModel Passage = _context.AboutUs.Select(a => new AboutUsViewModel
+            {
+                Title = a.Title,
+                Body = a.Body
+            }).Single();
+
+            return View(Passage);
+        }
+
+        [Route("/Admin/AboutUs")]
+        [HttpPost]
+        public IActionResult AboutUs(AboutUsViewModel passage)
+        {
+            AboutUs CurrentPassage = _context.AboutUs.First();
+
+            CurrentPassage.Title = passage.Title;
+            CurrentPassage.Body = passage.Body;
+
+            _context.Update(CurrentPassage);
+            _context.SaveChanges();
+
+            return Redirect("/Admin/AboutUs");
+        }
+
+        #endregion
+
+        #region Partners
+
+        [Route("/Admin/Partners")]
+        public IActionResult Partners()
+        {
+            return View(_context.Partner.AsNoTracking().ToList());
+        }
+
+        #region CreatePartner
+
+        [Route("/Admin/CreatePartner")]
+        public IActionResult CreatePartner()
+        {
+            return View();
+        }
+
+        [Route("/Admin/CreatePartner")]
+        [HttpPost]
+        public IActionResult CreatePartner(CreatePartnerViewModel partner)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(partner);
+            }
+
+            Partner NewPartner = new Partner();
+
+            NewPartner.Title = partner.Title;
+            NewPartner.IsActive = true;
+            NewPartner.Date = DateTime.Now;
+
+            ImageHelper i = new ImageHelper(_en);
+
+            string ImagePath = "\\Admin\\img\\PartnerImages\\";
+
+            string ThumbPath = "\\Admin\\img\\PartnerThumbnails\\";
+
+            NewPartner.ImageName = i.AddImage(partner.ImageName, ImagePath, ThumbPath);
+
+            _context.Add(NewPartner);
+            _context.SaveChanges();
+
+            return Redirect("/Admin/Partners");
+        }
+
+        #endregion
+
+        #region EditPartner
+
+        [Route("/Admin/EditPartner/{id}")]
+        public IActionResult EditPartner(int id)
+        {
+            EditPartnerViewModel CurrentPartner = _context.Partner.Where(p => p.Id == id).Select(p => new EditPartnerViewModel
+            {
+                Title = p.Title,
+                CurrentImage = p.ImageName
+            }).Single();
+
+            return View(CurrentPartner);
+        }
+
+
+        [Route("/Admin/EditPartner/{id}")]
+        [HttpPost]
+        public IActionResult EditPartner(int id, EditPartnerViewModel updatedPartner, string currentImage)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedPartner);
+            }
+
+            Partner NewPartner = _context.Partner.Find(id);
+
+            NewPartner.Title = updatedPartner.Title;
+
+            ImageHelper i = new ImageHelper(_en);
+
+            string ImagePath = "\\Admin\\img\\PartnerImages\\";
+
+            string ThumbPath = "\\Admin\\img\\PartnerThumbnails\\";
+
+            NewPartner.ImageName = i.EditImage(updatedPartner.ImageName, currentImage, ImagePath, ThumbPath);
+
+            _context.Update(NewPartner);
+            _context.SaveChanges();
+
+            return Redirect("/Admin/Partners");
+        }
+
+        #endregion
+
+        #region Activation
+
+        [Route("/Admin/ActivatePartner/{id}")]
+        public IActionResult ActivatePartner(int id)
+        {
+            Partner Partner = _context.Partner.Find(id);
+            Partner.IsActive = true;
+
+            _context.Update(Partner);
+            _context.SaveChanges();
+
+            return Redirect($"/Admin/Partners");
+        }
+
+
+        [Route("/Admin/MakePartnerNonActive/{id}")]
+        public IActionResult MakePartnerNonActive(int id)
+        {
+            Partner Partner = _context.Partner.Find(id);
+            Partner.IsActive = false;
+
+            _context.Update(Partner);
+            _context.SaveChanges();
+
+            return Redirect($"/Admin/Partners");
+        }
+
+        #endregion
+
+        #region DeletePartner
+
+        [Route("/Admin/DeletePartner/{id}")]
+        public IActionResult DeletePartn(int id, string image)
+        {
+            Partner Partner = _context.Partner.Find(id);
+
+            _context.Entry(Partner).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
+
+            string Path = $"{_en.WebRootPath}\\Admin\\img\\PartnerImages\\{image}";
+            FileInfo file = new FileInfo(Path);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+
+            string Path1 = $"{_en.WebRootPath}\\Admin\\img\\PartnerThumbnails\\{image}";
+            FileInfo file1 = new FileInfo(Path1);
+            if (file1.Exists)
+            {
+                file1.Delete();
+            }
+
+            return Redirect("/Admin/Partners");
+        }
+
+        #endregion
+
+        #endregion
     }
 }

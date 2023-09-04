@@ -40,6 +40,7 @@ namespace BeautySalon.Controllers
             ViewBag.Employees = _context.Admin.Where(a => a.IsActive == true && a.AdminRole == 2).ToList();
             ViewBag.WorkingDays = _context.WorkingDays.Where(w => w.IsActive == true).ToList();
             ViewBag.Weblogs = _context.Weblogs.Where(w => w.IsActive == true).ToList();
+            ViewBag.Partners = _context.Partner.Where(p => p.IsActive == true).ToList();
 
             DateTime N = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 

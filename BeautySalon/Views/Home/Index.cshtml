@@ -15,6 +15,7 @@
 
 @{
     List<BeautySalon.Models.Entities.Gallery> Gallery = ViewBag.Gallery;
+    List<BeautySalon.Models.Entities.WorkingDays> WorkingDays = ViewBag.WorkingDays;
 }
 
 <!--//================Header end==============//-->
@@ -296,6 +297,12 @@ else
                     <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
                         <h1>Opening hours</h1>
                         <div class="heading-lines"><span class="saf-boxs"></span></div>
+                        @if (WorkingDays.Count == 0)
+                        {
+                            <p style="font-size:110%">
+                                فعلا روز کاری ای موجود است
+                            </p>
+                        }
                     </div>
                 </div>
             </div>
@@ -541,62 +548,16 @@ else
     <div class="container">
         <div class="row">
             <div id="partner-slider" class="owl-carousel owl-theme owl-loaded owl-drag">
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/4.png" alt="">
-                        </figure>
+                @foreach (var Item in ViewBag.Partners)
+                {
+                    <div class="col-xs-12">
+                        <div class="item">
+                            <figure>
+                                <img src="/Admin/img/PartnerImages/@Item.ImageName" alt="">
+                            </figure>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/5.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/6.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/7.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/8.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/6.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/7.png" alt="">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="item">
-                        <figure>
-                            <img src="/assets/img/partner/8.png" alt="">
-                        </figure>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
@@ -634,7 +595,7 @@ else
                                 پروفایل شما تکمیل نشده است! برای انجام رزرواسیون باید پروفایل کاملی داشته باشید
                             </div>
                         }
-                        <form asp-action="CreateAReservation" dir="rtl">
+                        <form action="/Services/CreateAReservation" dir="rtl">
                             <div class="col-md-12 col-sm-12 col-xs-12 marB30 positionR">
                                 <select type="text" id="SelectBoxServiceId" asp-items="@(ViewBag.SelectBoxServices  as SelectList)"></select>
                                 <i style="margin:2%" class="fa fa-th-large input" aria-hidden="true"></i>

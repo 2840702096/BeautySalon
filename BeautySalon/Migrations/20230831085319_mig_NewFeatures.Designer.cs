@@ -4,14 +4,16 @@ using BeautySalon.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeautySalon.Migrations
 {
     [DbContext(typeof(SalonContext))]
-    partial class SalonContextModelSnapshot : ModelSnapshot
+    [Migration("20230831085319_mig_NewFeatures")]
+    partial class mig_NewFeatures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -431,8 +433,8 @@ namespace BeautySalon.Migrations
                     b.Property<int?>("Score")
                         .HasColumnType("int");
 
-                    b.Property<string>("ValidationCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ValidationCode")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 

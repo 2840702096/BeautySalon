@@ -1,5 +1,5 @@
 ﻿@using BeautySalon.Models.Tools;
-@model List<Gallery>
+@model List<Partner>
 
 @{
 }
@@ -35,14 +35,16 @@
 
 <div class="card">
     <div class="card-body">
-        <a class="btn btn-light btn--icon-text" href="/Admin/AddImageToGallery"><i class="zmdi zmdi-plus"></i> افزودن عکس</a>
+        <a class="btn btn-light btn--icon-text" href="/Admin/CreatePartner"><i class="zmdi zmdi-plus"></i> افزودن پارتنر</a>
         <h6 class="card-subtitle"></h6>
 
         <div class="table-responsive">
             <table id="data-table" class="table table-striped ">
                 <thead>
                     <tr>
+                        <th>عنوان</th>
                         <th>عکس</th>
+                        <th>تاریخ ساخت</th>
                         <th>وضعیت</th>
                         <th>عملیات</th>
                     </tr>
@@ -52,7 +54,13 @@
                     {
                         <tr>
                             <td style="vertical-align:middle">
-                                <img class="lightbox__item photos__item" style="width:30%; border-radius:15%" src="/Admin/img/GalleryThumbNail/@Item.Image">
+                                @Item.Title
+                            </td>
+                            <td style="vertical-align:middle">
+                                <img class="lightbox__item photos__item" style="width:30%; border-radius:15%" src="/Admin/img/PartnerThumbnails/@Item.ImageName">
+                            </td>
+                            <td style="vertical-align:middle">
+                                @PersianDate.ToPersianDateString(Item.Date)
                             </td>
                             <td style="vertical-align:middle">
                                 @if (Item.IsActive == true)
@@ -68,15 +76,16 @@
                                 <div class="dropdown">
                                     <button class="btn btn-light" data-toggle="dropdown" aria-expanded="false">عملیات</button>
                                     <div class="dropdown-menu dropdown-menu--icon" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a href="/Admin/EditPartner/@Item.Id" class="dropdown-item"><i class="zmdi zmdi-edit"></i> ویرایش</a>
                                         @if (Item.IsActive)
                                         {
-                                            <a href="/Admin/MakeImageNonActive/@Item.id" class="dropdown-item"><i class="zmdi zmdi-close-circle"></i> غیر فعال کردن</a>
+                                            <a href="/Admin/MakePartnerNonActive/@Item.Id" class="dropdown-item"><i class="zmdi zmdi-close-circle"></i> غیر فعال کردن</a>
                                         }
                                         else
                                         {
-                                            <a href="/Admin/ActivateImage/@Item.id" class="dropdown-item"><i class="zmdi zmdi-check"></i> فعال کردن</a>
+                                            <a href="/Admin/ActivatePartner/@Item.Id" class="dropdown-item"><i class="zmdi zmdi-check"></i> فعال کردن</a>
                                         }
-                                        <a href="/Admin/DeleteImageFromGallery/@Item.id?currentImage=@Item.Image" class="dropdown-item"><i class="zmdi zmdi-delete"></i> حذف</a>
+                                        <a href="/Admin/DeletePartner/@Item.Id?image=@Item.ImageName" class="dropdown-item"><i class="zmdi zmdi-delete"></i> حذف</a>
                                     </div>
                                 </div>
                             </td>

@@ -10,7 +10,7 @@ namespace BeautySalon.Models.Entities
         public string FullName { get; set; }
         public string Phone { get; set; }
         public int? Score { get; set; }
-        public int ValidationCode { get; set; }
+        public string ValidationCode { get; set; }
         public string ImageName { get; set; }
 
         #region Relations
