@@ -126,68 +126,52 @@ namespace BeautySalon.Controllers
                 return Redirect("/Home/Index");
             }
 
-            if(User.Identity.IsAuthenticated)
+            WorkingTime WT = _context.WorkingTime.Find(reservation.TimeId);
+
+            int UserId = int.Parse(User.Identity.GetId());
+
+            var user = _context.User.Find(UserId);
+            if(user.FullName == null)
             {
-                WorkingTime WT = _context.WorkingTime.Find(reservation.TimeId);
-
-                int UserId = int.Parse(User.Identity.GetId());
-
-                var user = _context.User.Find(UserId);
-                if (user.FullName == null)
-                {
-                    ViewBag.ImPerfectProfile = true;
-                    return View("ReserveService");
-                }
-                if(reservation.TimeId != 0)
-                {
-                    Reservations NewReservation = new Reservations()
-                    {
-                        UserId = UserId,
-                        WorkingTimeId = reservation.TimeId,
-                        Status = 0,
-                        Description = reservation.Description,
-                        Price = int.Parse(WT.Price),
-                        ReservationCost = int.Parse(WT.ReservationCost),
-                        JobId = WT.JobId,
-                        JopName = WT.JobName,
-                        AdminId = WT.AdminId,
-                        AdminName = WT.AdminName,
-                        StartTime = WT.StartTime,
-                        EndTime = WT.EndTime,
-                        DayDate = WT.DayDate,
-                        DayName = WT.DayName,
-                    };
-
-                    _context.Add(NewReservation);
-                    _context.SaveChanges();
-
-                    if (_context.Reservations.Any(r => r.WorkingTimeId == WT.Id))
-                    {
-                        WT.IsReserved = true;
-                        WT.IsActive = false;
-
-                        _context.Update(WT);
-
-                        int Score = _context.SubJob.Find(WT.JobId).Score;
-
-                        user.Score = Score;
-
-                        _context.Update(user);
-                    }
-
-                    _context.SaveChanges();
-
-                    return Redirect("/");
-                }
-                else
-                {
-                    return Redirect("/");
-                }
+                ViewBag.ImPerfectProfile = true;
+                return View("ReserveService");
             }
-            else
+            Reservations NewReservation = new Reservations()
             {
-                return Redirect("/Account");
+                UserId = UserId,
+                WorkingTimeId = reservation.TimeId,
+                Status = 0,
+                Description = reservation.Description,
+                Price = int.Parse(WT.Price),
+                ReservationCost = int.Parse(WT.ReservationCost),
+                JobId = WT.JobId,
+                JopName = WT.JobName,
+                AdminId = WT.AdminId,
+                AdminName = WT.AdminName,
+                StartTime = WT.StartTime,
+                EndTime = WT.EndTime,
+                DayDate = WT.DayDate,
+                DayName = WT.DayName,
+            };
+
+            _context.Add(NewReservation);
+
+            if(_context.Reservations.Any(r=>r.WorkingTimeId == WT.Id))
+            {
+                WT.IsReserved = true;
+
+                _context.Update(WT);
+
+                int Score = _context.SubJob.Find(WT.JobId).Score;
+
+                user.Score = Score;
+
+                _context.Update(user);
             }
+
+            _context.SaveChanges();
+
+            return Redirect("/");
         }
 
         #endregion

@@ -17,6 +17,5 @@ namespace BeautySalon.Models.Services.Interfaces
         List<SelectListItem> GetWorkingTimeDueToPersonel(int id, int dayId);
         List<SelectListItem> GetServices();
         string GetUserFullName(int id);
-        bool IsThisUserAnAdmin(string phone);
     }
 }

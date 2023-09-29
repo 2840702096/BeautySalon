@@ -7,12 +7,6 @@ namespace BeautySalon.Models.Entities
 {
     public class Reservations
     {
-        public Reservations()
-        {
-            
-        }
-
-        [Key]
         public int Id { get; set; }
         public int UserId { get; set; }
         public int WorkingTimeId { get; set; }

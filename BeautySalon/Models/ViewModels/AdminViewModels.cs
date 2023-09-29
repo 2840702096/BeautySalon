@@ -388,20 +388,4 @@ namespace BeautySalon.Models.ViewModels
     }
 
     #endregion
-
-    #region HappyClients
-
-    public class AddHappyClientViewModel
-    {
-
-        [Display(Name = "کاربر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string User { get; set; }
-
-        [Display(Name = "متن")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string Body { get; set; }
-    }
-
-    #endregion
 }

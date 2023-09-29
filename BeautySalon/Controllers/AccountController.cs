@@ -12,8 +12,6 @@ using System.Security.Claims;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Areas;
 using System;
 using RestSharp;
-using BeautySalon.Models;
-using BeautySalon.Models.Services.Interfaces;
 
 namespace BeautySalon.Controllers
 {
@@ -22,12 +20,10 @@ namespace BeautySalon.Controllers
         private readonly SalonContext _context;
 
         private readonly IWebHostEnvironment _en;
-        private readonly IHelpingServices _helpingService;
-        public AccountController(SalonContext context, IWebHostEnvironment en, IHelpingServices helpingService)
+        public AccountController(SalonContext context, IWebHostEnvironment en)
         {
             _context = context;
             _en = en;
-            _helpingService = helpingService;
         }
 
         [Route("/Account")]
@@ -63,14 +59,14 @@ namespace BeautySalon.Controllers
                 var User = _context.User.SingleOrDefault(u => u.Phone == phone);
                 if (User != null)
                 {
-                    //var R = new Random();
-                    //int Rn = R.Next(1000, 9999);
-                    //string code = Rn.ToString();
-                    //var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
-                    //client.Timeout = -1;
-                    //var request = new RestRequest(Method.GET);
-                    //IRestResponse response = client.Execute(request);
-                    User.ValidationCode = "1111";
+                    var R = new Random();
+                    int Rn = R.Next(1000, 9999);
+                    string code = Rn.ToString();
+                    var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.GET);
+                    IRestResponse response = client.Execute(request);
+                    User.ValidationCode = code;
                     _context.User.Update(User);
                     _context.SaveChanges();
                     ViewBag.Phone = phone;
@@ -90,14 +86,14 @@ namespace BeautySalon.Controllers
                 _context.Add(User);
                 _context.SaveChanges();
 
-                //var R = new Random();
-                //int Rn = R.Next(1000, 9999);
-                //string code = Rn.ToString();
-                //var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
-                //client.Timeout = -1;
-                //var request = new RestRequest(Method.GET);
-                //IRestResponse response = client.Execute(request);
-                User.ValidationCode = "1111";
+                var R = new Random();
+                int Rn = R.Next(1000, 9999);
+                string code = Rn.ToString();
+                var client = new RestClient($"https://portal.amootsms.com/webservice2.asmx/SendWithPattern?UserName=09371552698&Password=dell3porde&Mobile={phone}&PatternCodeID=1871	&PatternValues={code}");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                User.ValidationCode = code;
                 _context.User.Update(User);
                 _context.SaveChanges();
                 ViewBag.Phone = phone;
@@ -109,16 +105,11 @@ namespace BeautySalon.Controllers
         }
 
         [Route("/FinalSignIn")]
-        public IActionResult FinalSignIn(string validationCode, string phone)
+        public IActionResult FinalSignIn(string validationCode, string phone, int loginOrRegister)
         {
             var User = _context.User.SingleOrDefault(u => u.Phone == phone);
             if (User.ValidationCode == validationCode)
             {
-                User.IsActive = true;
-
-                _context.Update(User);
-                _context.SaveChanges();
-
                 var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier,User.id.ToString()),
@@ -160,8 +151,7 @@ namespace BeautySalon.Controllers
                     {
                         new Claim(ClaimTypes.NameIdentifier,User.Id.ToString()),
                         new Claim(ClaimTypes.Name,User.Name),
-                        new Claim(ClaimTypes.Actor,User.AdminRole.ToString()),
-                        new Claim(ClaimTypes.MobilePhone,User.Phone)
+                        new Claim(ClaimTypes.Actor,User.AdminRole.ToString())
                     };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
@@ -236,8 +226,7 @@ namespace BeautySalon.Controllers
                     {
                         new Claim(ClaimTypes.NameIdentifier,User.Id.ToString()),
                         new Claim(ClaimTypes.Name,User.UserName),
-                        new Claim(ClaimTypes.Actor,User.AdminRole.ToString()),
-                        new Claim(ClaimTypes.MobilePhone,User.Phone)
+                        new Claim(ClaimTypes.Actor,User.AdminRole.ToString())
                     };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
@@ -261,19 +250,6 @@ namespace BeautySalon.Controllers
         [Route("/SignOut")]
         public IActionResult SignOut()
         {
-            if (_helpingService.IsThisUserAnAdmin(User.Identity.GetPhone()))
-            {
-                
-            }
-            else
-            {
-                var CUser = _context.User.Find(int.Parse(User.Identity.GetId()));
-                CUser.IsActive = false;
-
-                _context.Update(CUser);
-                _context.SaveChanges();
-            }
-
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/");
         }

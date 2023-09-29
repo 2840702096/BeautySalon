@@ -16,8 +16,6 @@
 @{
     List<BeautySalon.Models.Entities.Gallery> Gallery = ViewBag.Gallery;
     List<BeautySalon.Models.Entities.WorkingDays> WorkingDays = ViewBag.WorkingDays;
-    List<BeautySalon.Models.Entities.Partner> Partners = ViewBag.Partners;
-    List<BeautySalon.Models.Entities.HappyClients> HappyClients = ViewBag.HappyClients;
 }
 
 <!--//================Header end==============//-->
@@ -228,6 +226,13 @@
                                                 <img src="/Admin/img/AdminThumbnail/@Item.Image" alt="">
                                             </a>
                                         </figure>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                        <hr>
                                         <h4><a href="/TeamDetail/@Item.Id">@Item.Name</a></h4>
                                         <p>@Item.SubJobName</p>
                                     </div>
@@ -355,6 +360,13 @@ else
                                                 <img src="/Admin/img/AdminThumbnail/@Item.Image" alt="">
                                             </a>
                                         </figure>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                        <hr>
                                         <h4><a href="/TeamDetail/@Item.Id">@Item.Name</a></h4>
                                         <p>@Item.SubJobName</p>
                                     </div>
@@ -370,62 +382,114 @@ else
 }
 
 <div class="clear"></div>
-@if (HappyClients.Count != 0)
-{
-    <!--//================ Our Customer start ==============//-->
-    <section class="padTB100 customer-section">
-        <!--- Theme heading start-->
-        <div class="theme-heading background marB100 positionR">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
-                        <h1>Happy Clients</h1>
-                        <div class="heading-lines"><span class="saf-boxs"></span></div>
-                        <p>
-                            You can read our clients' opinions here
-                        </p>
+<!--//================ Our Customer start ==============//-->
+<section class="padTB100 customer-section">
+    <!--- Theme heading start-->
+    <div class="theme-heading background marB100 positionR">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12  col-md-offset-3 col-sm-offset-2 col-xs-offset-0 heading-box text-center">
+                    <h1>Happy Clients</h1>
+                    <div class="heading-lines"><span class="saf-boxs"></span></div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer lorem  quam, adipiscing
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- Theme heading end-->
+    <div class="container">
+        <div class="row">
+            <div id="customer-slider" class="owl-carousel owl-theme slider positionR">
+                <div class="item">
+                    <div class="col-md-12">
+                        <div class="customer-box">
+                            <blockquote>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit  eiusmod tempo
+                                incididuntdolor sit amet, consectetur  adipisicing incididuntdolor.
+                            </blockquote>
+                            <div class="customer-detail">
+                                <div class="customer-img">
+                                    <figure>
+                                        <img src="/assets/img/all/5.jpg" alt="">
+                                    </figure>
+                                </div>
+                                <div class="caption">
+                                    <h3>Pellentesque cursus</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-12">
+                        <div class="customer-box">
+                            <blockquote>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit  eiusmod tempo
+                                incididuntdolor sit amet, consectetur  adipisicing incididuntdolor.
+                            </blockquote>
+                            <div class="customer-detail">
+                                <div class="customer-img">
+                                    <figure>
+                                        <img src="/assets/img/all/6.jpg" alt="">
+                                    </figure>
+                                </div>
+                                <div class="caption">
+                                    <h3>Pellentesque cursus</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-12">
+                        <div class="customer-box">
+                            <blockquote>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                eiusmod tempor incididuntdolor sit amet, consectetur
+                                adipisicing incididuntdolor sit amet
+                            </blockquote>
+                            <div class="customer-detail">
+                                <div class="customer-img">
+                                    <figure>
+                                        <img src="/assets/img/all/5.jpg" alt="">
+                                    </figure>
+                                </div>
+                                <div class="caption">
+                                    <h3>Pellentesque cursus</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-12">
+                        <div class="customer-box">
+                            <blockquote>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                eiusmod tempor incididuntdolor sit amet, consectetur
+                                adipisicing incididuntdolor sit amet
+                            </blockquote>
+                            <div class="customer-detail">
+                                <div class="customer-img">
+                                    <figure>
+                                        <img src="/assets/img/all/6.jpg" alt="">
+                                    </figure>
+                                </div>
+                                <div class="caption">
+                                    <h3>Pellentesque cursus</h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--- Theme heading end-->
-        <div class="container">
-            <div class="row">
-                <div id="customer-slider" class="owl-carousel owl-theme slider positionR">
-                    @foreach (var Item in HappyClients)
-                    {
-                        <div class="item">
-                            <div class="col-md-12">
-                                <div class="customer-box">
-                                    <blockquote dir="rtl" style="display: -webkit-box;-webkit-line-clamp: 3 ;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                        @Item.Opinion
-                                    </blockquote>
-                                    <div class="customer-detail">
-                                        <div class="customer-img" style="width:15%">
-                                            <figure>
-                                                <a href="/HappyClient/@Item.Id">
-                                                <img src="/Profile/img/ProfileThumbnails/@Item.ImageName" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="caption">
-                                            <a href="/HappyClient/@Item.Id">
-                                                <h3>@Item.FullName</h3>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--//================ Our Customer end ==============//-->
-}
-
+    </div>
+</section>
+<!--//================ Our Customer end ==============//-->
 <div class="clear"></div>
 <!--//================ Blog start ==============//-->
 <section class="padB70">
@@ -479,31 +543,26 @@ else
 </section>
 <!--//================ Blog end ==============//-->
 <div class="clear"></div>
-
-@if (Partners.Count != 0)
-{
-    <!--//================ Our Partner start ==============//-->
-    <div class="partner-box">
-        <div class="container">
-            <div class="row">
-                <div id="partner-slider" class="owl-carousel owl-theme owl-loaded owl-drag">
-                    @foreach (var Item in ViewBag.Partners)
-                    {
-                        <div class="col-xs-12">
-                            <div class="item">
-                                <figure>
-                                    <img src="/Admin/img/PartnerImages/@Item.ImageName" alt="">
-                                </figure>
-                            </div>
+<!--//================ Our Partner start ==============//-->
+<div class="partner-box">
+    <div class="container">
+        <div class="row">
+            <div id="partner-slider" class="owl-carousel owl-theme owl-loaded owl-drag">
+                @foreach (var Item in ViewBag.Partners)
+                {
+                    <div class="col-xs-12">
+                        <div class="item">
+                            <figure>
+                                <img src="/Admin/img/PartnerImages/@Item.ImageName" alt="">
+                            </figure>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-    <!--//================ Our Partner end ==============//-->
-}
-
+</div>
+<!--//================ Our Partner end ==============//-->
 <div class="clear"></div>
 <!--//================Book Table start==============//-->
 <section class="padT100 padB70">

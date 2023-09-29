@@ -56,13 +56,9 @@
                                                 <a href="#">pages</a>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="/Home/Index#Re">Reservation</a></li>
-                                                    <li><a href="/AboutUs">About Us</a></li>
-                                                    <li><a href="/Gallery">Gallery</a></li>
-                                                    @if(User.Identity.IsAuthenticated == true)
-                                                    {
-                                                        <li><a href="/Profile">Profile</a></li>
-                                                    }
-                                                    <li><a href="/PersonelList">Personel</a></li>
+                                                    <li><a href="booking.html">About Us</a></li>
+                                                    <li><a href="booking.html">Gallery</a></li>
+                                                    <li><a href="user-profile.html">user</a></li>
                                                 </ul>
                                             </li>
 
@@ -86,6 +82,10 @@
                             <!-- col-md-12 -->
                             <!-- col-md-3 -->
                             <div class="col-md-4 col-sm-4">
+                                <div class="nav-seach-box">
+                                    <input type="text" name="search" class="search_terms" placeholder="Search">
+                                    <button class="button-style" type="submit" value=""><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
                                 @if (User.Identity.IsAuthenticated == true)
                                 {
                                     <div class="navigation-icon custom-drop">

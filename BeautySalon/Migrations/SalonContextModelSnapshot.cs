@@ -168,21 +168,18 @@ namespace BeautySalon.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Opinion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("User")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("User");
 
                     b.ToTable("HappyClients");
                 });
@@ -428,24 +425,16 @@ namespace BeautySalon.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Userid")
-                        .HasColumnType("int");
-
                     b.Property<string>("ValidationCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("Userid");
 
                     b.ToTable("User");
                 });
@@ -590,17 +579,6 @@ namespace BeautySalon.Migrations
                     b.Navigation("SubJob");
                 });
 
-            modelBuilder.Entity("BeautySalon.Models.Entities.HappyClients", b =>
-                {
-                    b.HasOne("BeautySalon.Models.Entities.User", "UserId")
-                        .WithMany()
-                        .HasForeignKey("User")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("UserId");
-                });
-
             modelBuilder.Entity("BeautySalon.Models.Entities.Reservations", b =>
                 {
                     b.HasOne("BeautySalon.Models.Entities.Admin", "Admin")
@@ -637,13 +615,6 @@ namespace BeautySalon.Migrations
                         .IsRequired();
 
                     b.Navigation("Job");
-                });
-
-            modelBuilder.Entity("BeautySalon.Models.Entities.User", b =>
-                {
-                    b.HasOne("BeautySalon.Models.Entities.User", null)
-                        .WithMany("Users")
-                        .HasForeignKey("Userid");
                 });
 
             modelBuilder.Entity("BeautySalon.Models.Entities.Weblogs", b =>
@@ -698,8 +669,6 @@ namespace BeautySalon.Migrations
             modelBuilder.Entity("BeautySalon.Models.Entities.User", b =>
                 {
                     b.Navigation("Reservations");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("BeautySalon.Models.Entities.WorkingDays", b =>

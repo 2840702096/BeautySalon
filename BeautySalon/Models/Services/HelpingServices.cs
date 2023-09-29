@@ -85,19 +85,6 @@ namespace BeautySalon.Models.Services
             }).ToList();
         }
 
-        public bool IsThisUserAnAdmin(string phone)
-        {
-
-            if (_context.Admin.Any(a => a.Phone == phone))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public void NoneActiveFormerDays(DateTime n)
         {
 
@@ -126,6 +113,7 @@ namespace BeautySalon.Models.Services
                     Item.IsActive = false;
 
                     _context.Update(Item);
+                    _context.SaveChanges();
                 }
 
                 if (Item.DayDate == n && Item.StartTime < ts)
@@ -133,8 +121,8 @@ namespace BeautySalon.Models.Services
                     Item.IsActive = false;
 
                     _context.Update(Item);
+                    _context.SaveChanges();
                 }
-                _context.SaveChanges();
             }
         }
     }
