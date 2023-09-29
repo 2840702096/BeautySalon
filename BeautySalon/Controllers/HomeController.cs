@@ -1,9 +1,11 @@
 ﻿using BeautySalon.Models;
 using BeautySalon.Models.Context;
+using BeautySalon.Models.Entities;
 using BeautySalon.Models.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -33,14 +35,15 @@ namespace BeautySalon.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Sliders = _context.Sliders.Where(s => s.IsActive == true).ToList();
-            ViewBag.Specifications = _context.Specifications.Where(s => s.IsActive == true).ToList();
-            ViewBag.Services = _context.Job.Where(j => j.IsActive == true && j.Name != "صاحب آرایشگاه").ToList();
-            ViewBag.Gallery = _context.Gallery.Where(g => g.IsActive == true).OrderByDescending(g => g.CreateDate).Take(6).ToList();
-            ViewBag.Employees = _context.Admin.Where(a => a.IsActive == true && a.AdminRole == 2).ToList();
-            ViewBag.WorkingDays = _context.WorkingDays.Where(w => w.IsActive == true).ToList();
-            ViewBag.Weblogs = _context.Weblogs.Where(w => w.IsActive == true).ToList();
-            ViewBag.Partners = _context.Partner.Where(p => p.IsActive == true).ToList();
+            ViewBag.Sliders = _context.Sliders.AsNoTracking().Where(s => s.IsActive == true).ToList();
+            ViewBag.Specifications = _context.Specifications.AsNoTracking().Where(s => s.IsActive == true).ToList();
+            ViewBag.Services = _context.Job.AsNoTracking().Where(j => j.IsActive == true && j.Name != "صاحب آرایشگاه").ToList();
+            ViewBag.Gallery = _context.Gallery.AsNoTracking().Where(g => g.IsActive == true).OrderByDescending(g => g.CreateDate).Take(6).ToList();
+            ViewBag.Employees = _context.Admin.AsNoTracking().Where(a => a.IsActive == true && a.AdminRole == 2).ToList();
+            ViewBag.WorkingDays = _context.WorkingDays.AsNoTracking().Where(w => w.IsActive == true).ToList();
+            ViewBag.Weblogs = _context.Weblogs.AsNoTracking().Where(w => w.IsActive == true).ToList();
+            ViewBag.Partners = _context.Partner.AsNoTracking().Where(p => p.IsActive == true).ToList(); 
+            ViewBag.HappyClients = _context.HappyClients.AsNoTracking().ToList();
 
             DateTime N = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
@@ -105,11 +108,47 @@ namespace BeautySalon.Controllers
 
         #region Team
 
+        [Route("/PersonelList")]
+        public IActionResult PersonelList()
+        {
+            return View(_context.Admin.AsNoTracking().Where(a=>a.AdminRole == 2&& a.IsActive == true).ToList());
+        }
+
         [Route("/TeamDetail/{id}")]
         public IActionResult TeamDetail(int id)
         {
             var Detail = _context.Admin.Find(id);
             return View(Detail);
+        }
+
+        #endregion
+
+        #region Gallery
+
+        [Route("/Gallery")]
+        public IActionResult Gallery()
+        {
+            return View(_context.Gallery.AsNoTracking().Where(g => g.IsActive == true).ToList());
+        }
+
+        #endregion
+
+        #region AboutUs
+
+        [Route("/AboutUs")]
+        public IActionResult AboutUs()
+        {
+            return View(_context.AboutUs.First());
+        }
+
+        #endregion
+
+        #region HappyClients
+
+        [Route("/HappyClient/{id}")]
+        public IActionResult HappyClient(int id)
+        {
+            return View(_context.HappyClients.AsNoTracking().SingleOrDefault(h=>h.Id == id));
         }
 
         #endregion

@@ -1,5 +1,9 @@
 ﻿@using BeautySalon.Models.Tools;
-@inject IHelpingServices HelpingService;
+@model List<HappyClients>
+
+@{
+}
+
 @section Top
     {
 
@@ -12,7 +16,7 @@
     <link rel="stylesheet" href="/admin/css/app.min.css">
 }
 <header class="content__title">
-    <h1>لیست زمان های کاری</h1>
+    <h1>مشتریان راضی</h1>
 
     <div class="actions">
         <a href="/admin/default.htm" class="actions__item zmdi zmdi-trending-up"></a>
@@ -31,73 +35,38 @@
 
 <div class="card">
     <div class="card-body">
+        <a class="btn btn-light btn--icon-text" href="/Admin/AddHappyClient"><i class="zmdi zmdi-plus"></i> افزودن مشتری</a>
         <h6 class="card-subtitle"></h6>
 
         <div class="table-responsive">
             <table id="data-table" class="table table-striped ">
-                @if (ViewBag.ValuedInWorkingTime != null)
-                {
-                    <div style="text-align:right" class="alert alert-danger">
-                        این روز توسط کارمندان دیده و مقدار دهی شده است. عملیات حذف امکانپذیر نیست.
-                    </div>
-                    <a style="margin-right:25px; margin-bottom:10px" href="/Admin/WorkingDays" class="btn btn-outline btn-danger btn-sm">لغو</a>
-                }
                 <thead>
                     <tr>
-                        <th>کاربر</th>
-                        <th>زمان</th>
-                        <th>وضعیت</th>
-                        <th>توضیحات</th>
-                        <th>قیمت اصلی</th>
-                        <th>هزینه رزرواسیون</th>
-                        <th>پرسنل</th>
+                        <th>عکس</th>
+                        <th>نام و نام خانوادگی</th>
+                        <th>نظر</th>
+                        <th>تاریخ ثبت</th>
+                        <th>عملیات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var Item in ViewBag.Model)
+                    @foreach (var Item in Model)
                     {
                         <tr>
-                            <td style="vertical-align:middle; text-align:center">
-                                @HelpingService.GetUserFullName(Item.UserId)
+                            <td style="vertical-align:middle">
+                                <img class="lightbox__item photos__item" style="width:60%; border-radius:15%" src="/Profile/img/ProfileThumbnails/@Item.ImageName">
                             </td>
                             <td style="vertical-align:middle">
-                                @Item.StartTime - @Item.EndTime <br>
-                                @PersianDate.ToPersianDateString(Item.DayDate)  @Item.DayName
+                                @Item.FullName
                             </td>
                             <td style="vertical-align:middle">
-                                @if (Item.Status == 0)
-                                {
-                                    <p>رزرو شده</p>
-                                }
-                                @if (Item.Status == 1)
-                                {
-                                    <p>اتمام شده</p>
-                                }
-                                @if (Item.Status == 3)
-                                {
-                                    <p>حذف شده</p>
-                                }
+                                <a href="/Admin/Opinion/@Item.Id" class="btn btn-outline-secondary">مشاهده</a>
                             </td>
                             <td style="vertical-align:middle">
-                                @if (Item.Description == null)
-                                {
-                                    <p>مقداردهی نشده است</p>
-                                }
-                                else
-                                {
-                                    <a href="/SubAdmin/ReservationDescription/@Item.Id" class="btn btn-outline-secondary">مشاهده</a>
-                                }
+                                @PersianDate.ToPersianDateString(Item.Date)
                             </td>
                             <td style="vertical-align:middle">
-                                @Item.Price
-                            </td>
-                            <td style="vertical-align:middle">
-                                @Item.ReservationCost
-                            </td>
-                            <td style="vertical-align:middle">
-                                @Item.AdminName
-                                در کار <br>
-                                @Item.JopName
+                                <a href="/Admin/DeleteHappyClient/@Item.Id" class="btn btn-outline-secondary">حذف</a>
                             </td>
                         </tr>
                     }

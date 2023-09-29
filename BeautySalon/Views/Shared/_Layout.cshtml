@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject BeautySalon.Models.Services.Interfaces.IHelpingServices HelpingService;
+
+<!DOCTYPE html>
 <html lang="zxx">
 <!--
     **********************************************************************************************************
@@ -55,10 +57,21 @@
                                             <li>
                                                 <a href="#">pages</a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="#Re">Reservation</a></li>
-                                                    <li><a href="booking.html">About Us</a></li>
-                                                    <li><a href="booking.html">Gallery</a></li>
-                                                    <li><a href="user-profile.html">user</a></li>
+                                                    <li><a href="/Home/Index#Re">Reservation</a></li>
+                                                    <li><a href="/AboutUs">About Us</a></li>
+                                                    <li><a href="/Gallery">Gallery</a></li>
+                                                    @if (User.Identity.IsAuthenticated == true)
+                                                    {
+                                                        @if (HelpingService.IsThisUserAnAdmin(User.Identity.GetPhone()))
+                                                        {
+                                                            
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a href="/Profile">Profile</a></li>
+                                                        }
+                                                    }
+                                                    <li><a href="/PersonelList">Personel</a></li>
                                                 </ul>
                                             </li>
 
@@ -70,8 +83,8 @@
                                                 <a href="#">contact us</a>
 
                                                 @*<ul class="dropdown-menu">
-                                                    <li><a href="contact-us.html">Style 1</a></li>
-                                                    <li><a href="contact-us-style-2.html">Style 2</a></li>
+                                                <li><a href="contact-us.html">Style 1</a></li>
+                                                <li><a href="contact-us-style-2.html">Style 2</a></li>
                                                 </ul>*@
                                             </li>
                                         </ul>
@@ -82,26 +95,37 @@
                             <!-- col-md-12 -->
                             <!-- col-md-3 -->
                             <div class="col-md-4 col-sm-4">
-                                <div class="nav-seach-box">
-                                    <input type="text" name="search" class="search_terms" placeholder="Search">
-                                    <button class="button-style" type="submit" value=""><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </div>
                                 @if (User.Identity.IsAuthenticated == true)
                                 {
-                                    <div class="navigation-icon custom-drop">
-                                        <ul class="social-icon top-bar-icon">
-                                            <li>
-                                                <a href="/SignOut" class="theme-circle marL10">
-                                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/Profile" class="theme-circle marL10">
-                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @if (HelpingService.IsThisUserAnAdmin(User.Identity.GetPhone()))
+                                    {
+                                        <div class="navigation-icon custom-drop">
+                                            <ul class="social-icon top-bar-icon">
+                                                <li>
+                                                    <a href="/SignOut" class="theme-circle marL10">
+                                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="navigation-icon custom-drop">
+                                            <ul class="social-icon top-bar-icon">
+                                                <li>
+                                                    <a href="/SignOut" class="theme-circle marL10">
+                                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/Profile" class="theme-circle marL10">
+                                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
                                 }
                                 else
                                 {

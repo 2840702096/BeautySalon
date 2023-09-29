@@ -40,12 +40,12 @@
 
         <div class="table-responsive">
             <table id="data-table" class="table table-striped ">
-                @if (ViewBag.ValuedInWorkingTime != null)
+                @if (ViewBag.DeleteError != null)
                 {
                     <div style="text-align:right" class="alert alert-danger">
-                        این روز توسط کارمندان دیده و مقدار دهی شده است. عملیات حذف امکانپذیر نیست.
+                        این زمان کاری قبلا رزرو شده است و عملیات حذف امکانپذیر نیست.
                     </div>
-                    <a style="margin-right:25px; margin-bottom:10px" href="/Admin/WorkingDays" class="btn btn-outline btn-danger btn-sm">لغو</a>
+                    <a style="margin-right:25px; margin-bottom:10px" href="/Admin/WorkingTimes" class="btn btn-outline btn-danger btn-sm">لغو</a>
                 }
                 <thead>
                     <tr>
@@ -102,7 +102,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-light" data-toggle="dropdown" aria-expanded="false">عملیات</button>
                                     <div class="dropdown-menu dropdown-menu--icon" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                        @if (Item.DayDate < Now)
+                                        @if (Item.DayDate < Now || Item.IsActive == false)
                                         {
                                             <p style="text-align:right; margin-right:4%">تاریخ این زمان گذشته است و غیرفعال مباشد. خدماتی وجود ندارد.</p>
                                         }

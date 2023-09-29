@@ -1,0 +1,57 @@
+﻿@model User
+
+@section Top{
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/Admin//css/app.min.css">
+}
+
+<div class="content__inner content__inner--sm">
+    <header class="content__title">
+        <div class="actions">
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="/Admin/default.htm" class="actions__item zmdi zmdi-check-all"></a>
+
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/Admin/default.htm" class="dropdown-item">تازه سازی</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">مدیریت ویجت ها</a>
+                    <a href="/Admin/default.htm" class="dropdown-item">تنظیمات</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="card profile">
+        <div class="profile__img">
+            <img src="/Profile/img/ProfileThumbnails/@Model.ImageName" alt="">
+        </div>
+
+        <div class="profile__info">
+
+            <ul class="icon-list">
+                <li><i class="zmdi zmdi-account-box-o"></i> @Model.FullName</li>
+                <li><i class="zmdi zmdi-phone"></i> @Model.Phone</li>
+                <li><i class="zmdi zmdi-star"></i> @Model.Score</li>
+            </ul>
+        </div>
+    </div>
+    <div class="toolbar">
+        <a class="btn btn-light btn--icon-text" href="/Admin/Reservations" class="btn btn-light"><i class="zmdi zmdi-arrow-back"></i>بازگشت</a>
+    </div>
+</div>
+
+@section buttom{
+    <script src="/Admin/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Admin/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/Admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/Admin/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+    <!-- App functions and actions -->
+    <script src="/Admin/js/app.min.js"></script>
+}

@@ -52,6 +52,7 @@
                         <th>هزینه رزرواسیون</th>
                         <th>پرسنل</th>
                         <th>پرداخت نهایی</th>
+                        <th>حذف</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,16 +60,27 @@
                     {
                         <tr>
                             <td style="vertical-align:middle; text-align:center">
-                                @HelpingService.GetUserFullName(int.Parse(User.Identity.GetId()))
+                                @HelpingService.GetUserFullName(Item.UserId)
+                                <hr>
+                                <a href="/Admin/UserInformation/@Item.UserId" class="btn btn-outline-secondary">اطلاعات بیشتر</a>
                             </td>
                             <td style="vertical-align:middle">
-                                @Item.StartTime - @Item.EndTime <br>
+                                @string.Format("{0:00}:{1:00}", Item.StartTime.Hours,Item.StartTime.Minutes) - @string.Format("{0:00}:{1:00}", Item.EndTime.Hours,Item.EndTime.Minutes)
+                                 <br>
                                 @PersianDate.ToPersianDateString(Item.DayDate)  @Item.DayName
                             </td>
                             <td style="vertical-align:middle">
                                 @if (Item.Status == 0)
                                 {
-                                    <p>فعال</p>
+                                    <p>رزرو شده</p>
+                                }
+                                @if (Item.Status == 1)
+                                {
+                                    <p>اتمام شده</p>
+                                }
+                                @if (Item.Status == 3)
+                                {
+                                    <p>حذف شده</p>
                                 }
                             </td>
                             <td style="vertical-align:middle">
@@ -105,6 +117,9 @@
                                     <hr />
                                     <p>نهایی شده است</p>
                                 }
+                            </td>
+                            <td style="vertical-align:middle">
+                                <a href="/Admin/DeleteReservation/@Item.Id" class="btn btn-outline-secondary">حذف</a>
                             </td>
                         </tr>
                     }

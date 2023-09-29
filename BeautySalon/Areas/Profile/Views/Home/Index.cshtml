@@ -210,7 +210,15 @@
                                 <td style="vertical-align:middle">
                                     @if (Item.Status == 0)
                                     {
-                                        <p>فعال</p>
+                                        <p>رزرو شده</p>
+                                    }
+                                    @if (Item.Status == 1)
+                                    {
+                                        <p>اتمام شده</p>
+                                    }
+                                    @if (Item.Status == 3)
+                                    {
+                                        <p>حذف شده</p>
                                     }
                                 </td>
                                 <td style="vertical-align:middle">

@@ -1,8 +1,10 @@
-﻿using BeautySalon.Models.Context;
+﻿using BeautySalon.Models;
+using BeautySalon.Models.Context;
 using BeautySalon.Models.Entities;
 using BeautySalon.Models.Services.Interfaces;
 using BeautySalon.Models.Tools;
 using BeautySalon.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,12 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 
 namespace BeautySalon.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class HomeController : Controller
     {
@@ -38,7 +42,23 @@ namespace BeautySalon.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (_context.Admin.Any(a => a.Id == int.Parse(User.Identity.GetId())))
+            {
+                var Admin = _context.Admin.Find(int.Parse(User.Identity.GetId()));
+
+                if (Admin.AdminRole == 2)
+                {
+                    return Redirect("/SubAdmin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         #region JobList
@@ -1333,12 +1353,62 @@ namespace BeautySalon.Areas.Admin.Controllers
             var Reservation = _context.Reservations.Find(id);
 
             Reservation.FinalPayment = finalPayment;
+            Reservation.Status = 1;
 
             _context.Update(Reservation);
             _context.SaveChanges();
 
-            return View();
+            return Redirect("/Admin/Reservations");
         }
+
+        #region DeleteReservation
+
+        [Route("/Admin/DeleteReservation/{id}")]
+        public IActionResult DeleteReservation(int id)
+        {
+            var Reservation = _context.Reservations.Find(id);
+            Reservation.Status = 3;
+
+            _context.Update(Reservation);
+
+            DateTime N = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+
+            TimeSpan Ts = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
+            var WT = _context.WorkingTime.Find(Reservation.WorkingTimeId);
+
+            if (WT.DayDate > N)
+            {
+                WT.IsReserved = false;
+                WT.IsActive = true;
+
+                _context.Update(WT);
+            }
+
+            if (WT.DayDate == N && WT.StartTime > Ts)
+            {
+                WT.IsReserved = false;
+                WT.IsActive = true;
+
+                _context.Update(WT);
+            }
+
+            _context.SaveChanges();
+
+            return Redirect("/Admin/Reservations");
+        }
+
+        #endregion
+
+        #region UserInformation
+
+        [Route("/Admin/UserInformation/{id}")]
+        public IActionResult UserInformation(int id)
+        {
+            return View(_context.User.AsNoTracking().SingleOrDefault(u => u.id == id));
+        }
+
+        #endregion
 
         #endregion
 
@@ -1523,5 +1593,93 @@ namespace BeautySalon.Areas.Admin.Controllers
         #endregion
 
         #endregion
+
+        #region HappyClients
+
+        [Route("/Admin/HappyClients")]
+        public IActionResult HappyClients()
+        {
+            return View(_context.HappyClients.AsNoTracking().ToList());
+        }
+
+        #region AddHappyClient
+
+        [Route("/Admin/AddHappyClient")]
+        public IActionResult AddHappyClient()
+        {
+            var Users = _context.User.Where(u => u.IsActive == true).ToList();
+            List<User> FilteredUsers = new List<User>();
+
+            foreach (var Item in Users)
+            {
+                if (!_context.HappyClients.Any(h => h.User == Item.id))
+                {
+                    FilteredUsers.Add(Item);
+                }
+            }
+
+            ViewBag.Users = FilteredUsers;
+
+            return View();
+        }
+
+        [Route("/Admin/AddHappyClient")]
+        [HttpPost]
+        public IActionResult AddHappyClient(AddHappyClientViewModel happyClient)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Users = _context.User.Where(u => u.IsActive == true).ToList();
+                return View();
+            }
+
+            string[] NUser = happyClient.User.Split(",");
+
+            User user = _context.User.Find(Convert.ToInt32(NUser.AsQueryable().First()));
+
+            HappyClients HappyClient = new HappyClients();
+
+            HappyClient.User = Convert.ToInt32(NUser.AsQueryable().First());
+            HappyClient.FullName = NUser.AsQueryable().Last();
+            HappyClient.ImageName = user.ImageName;
+            HappyClient.Opinion = happyClient.Body;
+            HappyClient.Date = DateTime.Now;
+
+            _context.Add(HappyClient);
+            _context.SaveChanges();
+
+            return Redirect("/Admin/HappyClients");
+        }
+
+        #endregion
+
+        #region DeleteHappyClient
+
+        [Route("/Admin/DeleteHappyClient/{id}")]
+        public IActionResult DeleteHappyClient(int id)
+        {
+            HappyClients HappyClient = _context.HappyClients.Find(id);
+
+            _context.Entry(HappyClient).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
+
+            return Redirect("/Admin/HappyClients");
+        }
+
+        #endregion
+
+        #region Opinion
+
+        [Route("/Admin/Opinion/{id}")]
+        public IActionResult Opinion(int id)
+        {
+            ViewBag.Opinion = _context.HappyClients.Find(id).Opinion;
+            return View();
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }

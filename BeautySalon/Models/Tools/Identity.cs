@@ -15,5 +15,12 @@ namespace BeautySalon.Models
             Claim claim = ClimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
             return claim?.Value ?? string.Empty;
         }
+
+        public static string GetPhone(this IIdentity identity)
+        {
+            ClaimsIdentity ClimsIdentity = identity as ClaimsIdentity;
+            Claim claim = ClimsIdentity?.FindFirst(ClaimTypes.MobilePhone);
+            return claim?.Value ?? string.Empty;
+        }
     }
 }

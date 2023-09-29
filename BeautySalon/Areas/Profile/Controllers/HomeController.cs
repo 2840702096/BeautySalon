@@ -3,6 +3,7 @@ using BeautySalon.Models;
 using BeautySalon.Models.Context;
 using BeautySalon.Models.Tools;
 using BeautySalon.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
@@ -20,12 +21,13 @@ namespace BeautySalon.Areas.Profile.Controllers
             _en = en;
         }
 
+        [Authorize]
         [Area("Profile")]
         public IActionResult Index()
         {
             ViewBag.Model = _context.User.Find(int.Parse(User.Identity.GetId()));
             ViewBag.Id = int.Parse(User.Identity.GetId());
-            ViewBag.Reservations = _context.Reservations.Where(r => r.UserId == int.Parse(User.Identity.GetId()));
+            ViewBag.Reservations = _context.Reservations.Where(r => r.UserId == int.Parse(User.Identity.GetId())).OrderByDescending(r => r.DayDate);
 
             return View();
         }
@@ -62,6 +64,12 @@ namespace BeautySalon.Areas.Profile.Controllers
             User.ImageName = i.EditImage(profile.ImageName, currentImage, ImagePath, ThumbPath);
 
             _context.Update(User);
+
+            var HC = _context.HappyClients.SingleOrDefault(h => h.User == id);
+
+            HC.ImageName = User.ImageName;
+
+            _context.Update(HC);
             _context.SaveChanges();
 
             return Redirect("/Profile");

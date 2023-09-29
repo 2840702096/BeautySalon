@@ -12,6 +12,7 @@ using BeautySalon.Models;
 using Microsoft.VisualBasic;
 using BeautySalon.Models.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeautySalon.Areas.SubAdmin.Controllers
 {
@@ -30,10 +31,27 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
             _helpingService = helpingService;
         }
 
+        [Authorize]
         [Area("SubAdmin")]
         public IActionResult Index()
         {
-            return View();
+            if (_context.Admin.Any(a => a.Id == int.Parse(User.Identity.GetId())))
+            {
+                var Admin = _context.Admin.Find(int.Parse(User.Identity.GetId()));
+
+                if (Admin.AdminRole == 1)
+                {
+                    return Redirect("/Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         #region WorkingTimes
@@ -42,7 +60,7 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
         [Route("/SubAdmin/WorkingTimes")]
         public IActionResult WorkingTimes()
         {
-            List<WorkingTime> WorkingTimes = _context.WorkingTime.Where(w=>w.AdminId == int.Parse(User.Identity.GetId())).ToList();
+            List<WorkingTime> WorkingTimes = _context.WorkingTime.Where(w => w.AdminId == int.Parse(User.Identity.GetId())).ToList();
 
             DateTime N = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
@@ -171,7 +189,7 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
                 ReservationCost = w.ReservationCost
             }).Single();
 
-            ViewBag.Days = _context.WorkingDays.Where(w => w.Id != CurrentTime.DayId).ToList();
+            ViewBag.Days = _context.WorkingDays.AsNoTracking().Where(w => w.Id != CurrentTime.DayId && w.IsActive == true).ToList();
 
             return View(CurrentTime);
         }
@@ -271,7 +289,7 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
 
         [Area("SubAdmin")]
         [Route("/SubAdmin/MakeWorkingTimeNoneActive/{id}")]
-        public IActionResult MakeWorkingTimeNoneActive(int  id)
+        public IActionResult MakeWorkingTimeNoneActive(int id)
         {
             Models.Entities.WorkingTime Time = _context.WorkingTime.Find(id);
             Time.IsActive = false;
@@ -291,7 +309,24 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
         [Route("/SubAdmin/DeleteWorkingTime/{id}")]
         public IActionResult DeleteWorkingTime(int id)
         {
-            //Todo Make If Before Deleting
+            if(_context.Reservations.Any(r=>r.WorkingTimeId == id))
+            {
+                ViewBag.DeleteError = true;
+
+                List<WorkingTime> WorkingTimes = _context.WorkingTime.Where(w => w.AdminId == int.Parse(User.Identity.GetId())).ToList();
+
+                DateTime N = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+
+                ViewBag.Now = N;
+
+                TimeSpan Ts = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
+                ViewBag.Time = Ts;
+
+                _helpingService.NoneActiveFormerTimes(N, Ts);
+
+                return View(WorkingTimes);
+            }
 
             _context.Entry(_context.WorkingTime.Find(id)).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
@@ -309,7 +344,7 @@ namespace BeautySalon.Areas.SubAdmin.Controllers
         [Route("/SubAdmin/Reservations")]
         public IActionResult Reservations()
         {
-            ViewBag.Model = _context.Reservations.AsNoTracking().ToList();
+            ViewBag.Model = _context.Reservations.AsNoTracking().Where(r => r.AdminId == int.Parse(User.Identity.GetId())).ToList();
             return View();
         }
 
